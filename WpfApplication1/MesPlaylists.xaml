@@ -1,0 +1,146 @@
+﻿<Window x:Class="WpfApplication1.MesPlaylists"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MesPlaylists" Height="483.07" Width="767.605" MinWidth="1050" MinHeight="700" Icon="adds/1.png" >
+
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="89"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="210"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="89"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+    <DockPanel LastChildFill="True">
+
+        <Grid Name="GridMenu" Width="89" HorizontalAlignment="Left" Margin="0" Background="#FF0097FF">
+            <StackPanel>
+                <Grid Height="70" VerticalAlignment="Top" Background="#FF0097FF">
+                    <Button Name="ButtonOpenMenu" Click="ButtonOpenMenu_Click" HorizontalAlignment="Left" Margin="16,0,0,0" BorderBrush="White" Height="40" Width="50" Background="Blue">
+                        <materialDesign:PackIcon Kind="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Height="50" Width="34" />
+                    </Button>
+                    <Button Name="ButtonCloseMenu" Click="ButtonCloseMenu_Click" Visibility="Collapsed" HorizontalAlignment="Left" Margin="16,0,0,0" BorderBrush="White" Height="40" Width="50" Background="Blue">
+                        <materialDesign:PackIcon Kind="ArrowLeft" HorizontalAlignment="Center" VerticalAlignment="Center" BorderBrush="White" Height="50" Width="30" />
+                    </Button>
+                </Grid>
+                <ListView Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="Menu_Click">
+                    <ListViewItem Name="ItemRetour">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ArrowLeftBold" Height="50" Width="60" Foreground="White" Margin="5,0,0,0"/>
+                            <TextBlock Text="Retour" Margin="13,0,0,0" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Name="ItemAccueil">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="HomeAccount" Height="50" Width="60" Foreground="White" Margin="5,0,0,0"/>
+                            <TextBlock Text="Accueil" Margin="13,0,0,0" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Name="ItemMesMusiques">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Music" Height="50" Width="60" Foreground="White" Margin="5,0,0,0"/>
+                            <TextBlock Text="Mes Musiques" Margin="13,0,0,0" VerticalAlignment="Center" Foreground="White" FontSize="18"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="0.9*"/>
+                <ColumnDefinition Width="0.07*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="95" />
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#333333" />
+            <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Mes Playlists" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="229" FontFamily="Lucida Sans Unicode" Foreground="White"/>
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Name="NomPrenom" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Right">
+                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"  StaysOpen="False" Foreground="White">
+                    <StackPanel Width="150">
+                        <Button Content="Mon Compte" HorizontalAlignment="Center"/>
+                        <Label Name="Solde" FontSize="13" FontStyle="Italic" HorizontalAlignment="Center"/>
+                        <Button Content="Ajouter Solde" Click="AugmenterSolde" HorizontalAlignment="Center"/>
+                        <Button Content="Aide" HorizontalAlignment="Center"/>
+                        <Separator/>
+                        <Button Content="Se déconnecter" Click="SeDeconnecter" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+            <Button Content="Créer Playlist" Click="Playlist" Grid.Row="2" Grid.ColumnSpan="3" Width="140" />
+            <ListView Name="list" MouseDoubleClick="Page_Playlist" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="300" PreviewMouseLeftButtonUp="AfficherBouton">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="FontFamily" Value="Lucida Sans Unicode"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Nom}"  Width="300">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader Content="Vos Playlists :" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Button Name="DeleteButton" Content="Supprimer" Click="Supprimer" Grid.Row="6" Grid.ColumnSpan="3" VerticalAlignment="Top" Width="100" Visibility="Hidden" />
+            
+            <!-- L'InputBox pour ajouter un solde -->
+            <Grid Grid.RowSpan="5" Grid.ColumnSpan="3">
+                <Grid x:Name="InputBox" Visibility="Collapsed">
+                    <Grid Background="Black" Opacity="0.5"/>
+                    <Border
+            MinWidth="250"
+            Background="#FF0097FF" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            CornerRadius="0,55,0,55" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Margin="5" Text="Ajouter Solde:" FontWeight="Bold" FontFamily="Lucida Sans Unicode" Foreground="White"/>
+                            <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Name="InputTextBox" Background="White" Foreground="Black" FontFamily="Lucida Sans Unicode"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Name="ValidButton" Margin="5" Content="Valider" Click="Valider_Click"/>
+                                <Button Name="CancelButton" Margin="5" Content="Annuler" Click="Annuler_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

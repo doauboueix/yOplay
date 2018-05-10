@@ -1,0 +1,51 @@
+﻿<Window x:Class="WpfApplication1.Inscription"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="Inscription" Height="500" Width="739.496" Icon="adds/1.png">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="23" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+        <Style TargetType="PasswordBox">
+            <Setter Property="Height" Value="23" />
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="1" />
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="350"/>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" Background="#FF0097FF" />
+        <Button Grid.Row="0" Click="Retour" HorizontalAlignment="Left" Background="White" BorderThickness="0">
+            <Image Source="pack://application:,,,/WpfApplication1;component/adds/LeftArrow.png" />
+        </Button>
+        <Label Grid.Row="0" FontSize="50" Width="240" Content="Inscription" Foreground="White" VerticalAlignment="Center"/>
+        <StackPanel Grid.Row="2" Orientation="Vertical" Width="400">
+            <Label Content="Nom*" Width="250" FontFamily="Lucida Sans Unicode" />
+            <TextBox Name="Nom" Width="250" FontFamily="Lucida Sans Unicode" />
+            <Label Content="Prénom*" Width="250" FontFamily="Lucida Sans Unicode" />
+            <TextBox Name="Prenom" Width="250" FontFamily="Lucida Sans Unicode" />
+            <Label Content="Identifiant*" Width="250" FontFamily="Lucida Sans Unicode" />
+            <TextBox Name="Login" Width="250" FontFamily="Lucida Sans Unicode" />
+            <Label Content="Entrez un mot de passe*" Width="250" FontFamily="Lucida Sans Unicode" />
+            <PasswordBox Name="Mdp" Width="250" FontFamily="Lucida Sans Unicode" />
+            <Label Content="Confirmer le mot de passe*" Width="250" FontFamily="Lucida Sans Unicode" />
+            <PasswordBox Name="MdpConfirm" Width="250" FontFamily="Lucida Sans Unicode" />
+            <Label Content="Obligatoire*" Margin="70,10,0,10" FontFamily="Lucida Sans Unicode" />
+            <Button Click="CreationCompte" Content="Creer" Width="70" FontFamily="Lucida Sans Unicode" />
+        </StackPanel>
+
+    </Grid>
+</Window>

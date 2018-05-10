@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{645884E5-BE5E-48A0-B2D7-4A47E9726385}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WpfApplication1</RootNamespace>
+    <AssemblyName>WpfApplication1</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bunifu_UI_v1.5.3">
+      <HintPath>..\..\Bunifu_UI_v1.5.3.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.0.1044, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.2.4.0.1044\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Accueil.xaml.cs">
+      <DependentUpon>Accueil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreationPlaylist.xaml.cs">
+      <DependentUpon>CreationPlaylist.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Films.xaml.cs">
+      <DependentUpon>Films.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Films_Page.xaml.cs">
+      <DependentUpon>Films_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Inscription.xaml.cs">
+      <DependentUpon>Inscription.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ListPlaylists.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Media.cs" />
+    <Compile Include="MesFilms.xaml.cs">
+      <DependentUpon>MesFilms.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MesMusiques.xaml.cs">
+      <DependentUpon>MesMusiques.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MesPlaylists.xaml.cs">
+      <DependentUpon>MesPlaylists.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MLGcustomPlayer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MLGcustomPlayer.Designer.cs">
+      <DependentUpon>MLGcustomPlayer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Musiques.xaml.cs">
+      <DependentUpon>Musiques.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Musiques_Page.xaml.cs">
+      <DependentUpon>Musiques_Page.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Playlist.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Utilisateur.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="MLGcustomPlayer.resx">
+      <DependentUpon>MLGcustomPlayer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 et x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\5etoiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\1etoile.png" />
+    <Resource Include="adds\2etoiles.png" />
+    <Resource Include="adds\3etoiles.png" />
+    <Resource Include="adds\4etoiles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Film\AnimauxFantastiques2.jpg" />
+    <Resource Include="adds\Film\DeadPool2.jpg" />
+    <Resource Include="adds\Film\Ghostland.jpg" />
+    <Resource Include="adds\Film\Heredite.jpg" />
+    <Resource Include="adds\Film\JohnnyEnglish.jpg" />
+    <Resource Include="adds\Film\LesTuches3.jpg" />
+    <Resource Include="adds\Film\ReadyPlayerOne.jpg" />
+    <Resource Include="adds\Film\RedSparrow.jpg" />
+    <Resource Include="adds\Film\ShapeOfWater.jpg" />
+    <Resource Include="adds\Film\SlenderMan.jpg" />
+    <Resource Include="adds\Film\SoloStarWars.jpg" />
+    <Resource Include="adds\Film\taxi5.jpg" />
+    <Resource Include="adds\Film\TheFirstPurge.jpg" />
+    <Resource Include="adds\Film\ThePassenger.jpg" />
+    <Resource Include="adds\Film\TombRaider.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\God%27sPlan.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\Havana.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\Rockstar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\Friends.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\ColdAsStone.jpg" />
+    <Resource Include="adds\Musique\LikeIDo.jpg" />
+    <Resource Include="adds\Musique\Lullaby.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\RedColdRiver.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\TheMountain.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\SafariSong.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\Disillusioned.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\Delicate.jpg" />
+    <Resource Include="adds\Musique\IDGAF.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\AllTheStars.jpg" />
+    <Resource Include="adds\Musique\LookAlive.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Musique\King%27sDead.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Film\Akira.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\Pause.png" />
+    <Resource Include="adds\Play.png" />
+    <Resource Include="adds\VolumeOff.png" />
+    <Resource Include="adds\VolumeOn.png" />
+    <Resource Include="adds\Back.png" />
+    <Resource Include="adds\Close.png" />
+    <Resource Include="adds\Forward.png" />
+    <Resource Include="adds\Fullscreen.png" />
+    <Resource Include="adds\MediaPlayer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\LeftArrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="adds\LeftArrow2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Accueil.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="CreationPlaylist.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Films.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Films_Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Inscription.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MesFilms.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MesMusiques.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MesPlaylists.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Musiques.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Musiques_Page.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

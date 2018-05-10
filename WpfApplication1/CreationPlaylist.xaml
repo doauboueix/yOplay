@@ -1,0 +1,60 @@
+﻿<Window x:Class="WpfApplication1.CreationPlaylist"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApplication1"
+        mc:Ignorable="d"
+        Title="CreationPlaylist" Height="300" Width="300" MinWidth="700" MinHeight="550" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="95" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.ColumnSpan="2" Background="#FF0097FF" />
+        <Button Grid.Row="0" Click="Retour" HorizontalAlignment="Left" Background="White" BorderThickness="0">
+            <Image Source="pack://application:,,,/WpfApplication1;component/adds/LeftArrow.png" />
+        </Button>
+        <Label Grid.ColumnSpan="2" Content="Creation Playlist" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" FontFamily="Lucida Sans Unicode" FontSize="24" Foreground="#DDFFFFFF"/>
+        <Label Grid.Row="2" Content="Nom de la playlist :" HorizontalAlignment="Center"/>
+        <TextBox Name="NomPlaylist" Grid.Row="3" VerticalAlignment="Center" Width="200"  BorderBrush="Black" BorderThickness="1" OverridesDefaultStyle="True"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" Name="SelectBox"  Text="--Veuillez choisir une musique--" IsEditable="True" IsReadOnly="True" Width="220" BorderBrush="Black" BorderThickness="1" OverridesDefaultStyle="True" HorizontalAlignment="Center"/>
+        <Button Grid.Column="1" Grid.Row="5" Name="Add" Click="AddMusique" Content="Ajouter" Width="80" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <ListView Grid.Row="7" Grid.ColumnSpan="2" Name="list" Width="500" Height="200">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="FontFamily" Value="Lucida Sans Unicode"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Titre}" Width="170">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Nom" HorizontalContentAlignment="Center">Titre</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Auteur}" Width="330">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Tag="Nom" HorizontalContentAlignment="Center">Auteur(s)</GridViewColumnHeader>
+                        </GridViewColumn.Header>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Row="9" Grid.ColumnSpan="2" Name="Creation" Click="CreePlaylist" Content="Créer" Width="80" Height="25" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
