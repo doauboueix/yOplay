@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
+using ClassLibrary;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -88,18 +88,10 @@ namespace WpfApplication1
             else
             {
                 Utilisateur Utilisateur = new Utilisateur();
+                SQLupdate SQLupdate = new SQLupdate();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
-
+                SQLupdate.UpdateSolde();
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
             }

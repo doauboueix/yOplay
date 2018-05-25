@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace WpfApplication1
+namespace ClassLibrary
 {
 
-    public partial class Playlist
+    public class Playlist
     {
         public List<Musique> ListeMusique { set; get; }
         public string Nom { get; set; }

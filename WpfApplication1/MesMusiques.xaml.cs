@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using ClassLibrary;
+using NAudio.Wave;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -19,30 +21,19 @@ namespace WpfApplication1
         private int Minutes;
         private int Secondes;
         public List<string> mesMusiques = new List<string>(); // Liste des noms de films possédés par l'utilisateur actuel //
+
         public MesMusiques()
         {
             InitializeComponent();
-            using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-            {
-                Utilisateur Utilisateur = new Utilisateur();
-                NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("ChargementMesMusiques", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName());  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
-                cmd.ExecuteNonQuery(); // Execute la procédure //
-                SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
-                while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //
-                {
-                    mesMusiques.Add((string)reader[0]); // Ajoute dans la liste mesMusiques tous les noms de musique possédés par l'utilisateur actuel //
-                }
-                reader.Close();
-                Musiques Musiques = new Musiques();
-                foreach (string musique in mesMusiques) // Pour chacun des noms de musique présent dans cette liste, on cherche la correspondance avec l'objet "Musique" en question //
-                    eMusique.Add(Musiques.EMusique.Find(x => x.Titre == musique)); // On retourne l'objet correspond dans une list<Musique> //
-                list.ItemsSource = eMusique; // On affiche toutes les musiques possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
-            }
+            Utilisateur Utilisateur = new Utilisateur();
+            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
+            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+            SQLselect SQLselect = new SQLselect();
+           mesMusiques = SQLselect.ChargementMesMusiques();
+            Musiques Musiques = new Musiques();
+            foreach (string musique in mesMusiques) // Pour chacun des noms de musique présent dans cette liste, on cherche la correspondance avec l'objet "Musique" en question //
+                eMusique.Add(Musiques.EMusique.Find(x => x.Titre == musique)); // On retourne l'objet correspond dans une list<Musique> //
+            list.ItemsSource = eMusique; // On affiche toutes les musiques possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
         }
 
 
@@ -176,15 +167,8 @@ namespace WpfApplication1
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.UpdateSolde();
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

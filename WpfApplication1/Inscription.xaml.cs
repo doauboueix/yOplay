@@ -1,12 +1,10 @@
-﻿using System.Data;
-using System.Data.SqlClient;
-using System.Windows;
+﻿using System.Windows;
+using SQL;
 
 namespace WpfApplication1
 {
     public partial class Inscription : Window
     {
-        string connectionString = @" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;";
         public Inscription()
         {
             InitializeComponent();
@@ -29,20 +27,10 @@ namespace WpfApplication1
             }
             else
             {
-                using (SqlConnection sqlCon = new SqlConnection(connectionString))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("Inscription", sqlCon); // on appelle la procédure stockée "Inscription" qui créé un nouvel utilisateur //
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Nom", Nom.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Prenom", Prenom.Text.Trim());
-                    cmd.Parameters.AddWithValue("@UserName", Login.Text.Trim());
-                    cmd.Parameters.AddWithValue("@Password", Mdp.Password.Trim());
-                    cmd.Parameters.AddWithValue("@Solde", 0);
-                    cmd.ExecuteNonQuery();
-                    Clear();
-                    MessageBox.Show("Inscription réussie!", "Inscription");
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.Inscription(Nom.Text.Trim(), Prenom.Text.Trim(), Login.Text.Trim(), Mdp.Password.Trim());
+                Clear();
+                MessageBox.Show("Inscription réussie!", "Inscription");
                 MainWindow MainWindow = new MainWindow();
                 MainWindow.Show();
                 this.Close();

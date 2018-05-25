@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApplication1", "WpfApplication1\WpfApplication1.csproj", "{645884E5-BE5E-48A0-B2D7-4A47E9726385}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQL", "SQL\SQL.csproj", "{6C6CA8EA-4260-466B-9A58-FCC7FAE5C5DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{5344BD62-8BBE-438A-93C2-BA1D636351DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +19,19 @@ Global
 		{645884E5-BE5E-48A0-B2D7-4A47E9726385}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{645884E5-BE5E-48A0-B2D7-4A47E9726385}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{645884E5-BE5E-48A0-B2D7-4A47E9726385}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C6CA8EA-4260-466B-9A58-FCC7FAE5C5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C6CA8EA-4260-466B-9A58-FCC7FAE5C5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C6CA8EA-4260-466B-9A58-FCC7FAE5C5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C6CA8EA-4260-466B-9A58-FCC7FAE5C5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5344BD62-8BBE-438A-93C2-BA1D636351DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5344BD62-8BBE-438A-93C2-BA1D636351DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5344BD62-8BBE-438A-93C2-BA1D636351DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5344BD62-8BBE-438A-93C2-BA1D636351DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A369B4F-683C-4750-B0DE-136E0C1BCE46}
 	EndGlobalSection
 EndGlobal

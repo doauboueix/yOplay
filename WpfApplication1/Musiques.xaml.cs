@@ -9,6 +9,9 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Data.SqlClient;
 using System.Data;
+using ClassLibrary;
+using System.Linq;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -24,22 +27,22 @@ namespace WpfApplication1
             NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             DataContext = this;
-            EMusique.Add(new Musique(2.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/God'sPlan.jpg", "God's Plan", "Drake", "Scorpion", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\God'sPlan.wav"));
-            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/Rockstar.jpg", "Rockstar", "Post Malone & 21 Savage", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Rockstar.wav"));
-            EMusique.Add(new Musique(1.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Friends.jpg", "Friends", "Marshmello & Anne-Marie", "Speak your Mind", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Friends.wav"));
-            EMusique.Add(new Musique(3.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/SafariSong.jpg", "Safari Song", "Greta Van Fleet", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\SafariSong.wav"));
-            EMusique.Add(new Musique(3.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Havana.jpg", "Havana", "Camila Cabello", "Camila", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Havana.wav"));
-            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/King'sDead.jpg", "King's Dead", "Jay Rock & Kendrick Lamar & Future", "Black Panther", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\King'sDead.wav"));
-            EMusique.Add(new Musique(2.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Lullaby.jpg", "Lullaby", "R3HAB & Mike Williams", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Lullaby.wav"));
-            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/RedColdRiver.jpg", "Red Cold River", "Breaking Benjamin", "Ember", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\RedColdRiver.wav"));
-            EMusique.Add(new Musique(1.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/IDGAF.jpg", "IDGAF", "Dua Lipa", "Dua Lipa", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\IDGAF.wav"));
-            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/LookAlive.jpg", "Look Alive", "BlocBoy JB & Drake", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\LookAlive.wav"));
-            EMusique.Add(new Musique(3.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/ColdAsStone.jpg", "Cold as Stone", "Kaskade & Charlotte Lawrence", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\ColdAsStone.wav"));
-            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/TheMountain.jpg", "The Mountain", "Three Days Grace", "Outsider", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\TheMountain.wav"));
-            EMusique.Add(new Musique(0.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Delicate.jpg", "Delicate", "Taylor Swift", "reputation", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Delicate.wav"));
-            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/AllTheStars.jpg", "All the Stars", "Kendrick Lamar & SZA", "Black Panther", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\AllTheStars.wav"));
-            EMusique.Add(new Musique(0.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/LikeIDo.jpg", "Like I do", "David Guetta & Martin Garrix & Brooks", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\LikeIDo.wav"));
-            EMusique.Add(new Musique(2.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/Disillusioned.jpg", "Disillusioned", "A Perfect Circle", "Eat the Elephant", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Disillusioned.wav"));
+            EMusique.Add(new Musique(2.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/God'sPlan.jpg", "God's Plan", "Drake", "Scorpion", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\God'sPlan.wav"));
+            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/Rockstar.jpg", "Rockstar", "Post Malone & 21 Savage", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Rockstar.wav"));
+            EMusique.Add(new Musique(1.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Friends.jpg", "Friends", "Marshmello & Anne-Marie", "Speak your Mind", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Friends.wav"));
+            EMusique.Add(new Musique(3.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/SafariSong.jpg", "Safari Song", "Greta Van Fleet", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\SafariSong.wav"));
+            EMusique.Add(new Musique(3.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Havana.jpg", "Havana", "Camila Cabello", "Camila", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Havana.wav"));
+            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/King'sDead.jpg", "King's Dead", "Jay Rock & Kendrick Lamar & Future", "Black Panther", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\King'sDead.wav"));
+            EMusique.Add(new Musique(2.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Lullaby.jpg", "Lullaby", "R3HAB & Mike Williams", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Lullaby.wav"));
+            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/RedColdRiver.jpg", "Red Cold River", "Breaking Benjamin", "Ember", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\RedColdRiver.wav"));
+            EMusique.Add(new Musique(1.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/IDGAF.jpg", "IDGAF", "Dua Lipa", "Dua Lipa", @"C:\Users\nathan\Desktop\yoplay\WpfApplication1\adds\Media\IDGAF.wav"));
+            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/LookAlive.jpg", "Look Alive", "BlocBoy JB & Drake", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\LookAlive.wav"));
+            EMusique.Add(new Musique(3.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/ColdAsStone.jpg", "Cold as Stone", "Kaskade & Charlotte Lawrence", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\ColdAsStone.wav"));
+            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/TheMountain.jpg", "The Mountain", "Three Days Grace", "Outsider", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\TheMountain.wav"));
+            EMusique.Add(new Musique(0.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Delicate.jpg", "Delicate", "Taylor Swift", "reputation", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Delicate.wav"));
+            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/AllTheStars.jpg", "All the Stars", "Kendrick Lamar & SZA", "Black Panther", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\AllTheStars.wav"));
+            EMusique.Add(new Musique(0.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/LikeIDo.jpg", "Like I do", "David Guetta & Martin Garrix & Brooks", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\LikeIDo.wav"));
+            EMusique.Add(new Musique(2.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/Disillusioned.jpg", "Disillusioned", "A Perfect Circle", "Eat the Elephant", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Disillusioned.wav"));
             list.ItemsSource = EMusique;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
             view.Filter = UserFilter;
@@ -133,12 +136,7 @@ namespace WpfApplication1
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Menu_Tout(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter;
-        }
-        private bool MenuFilter(object item)
-        {
-            return ((item as Musique).Genre.IndexOf(Button.Content.ToString(), StringComparison.OrdinalIgnoreCase) != 0);
+            list.ItemsSource = EMusique;
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,12 +146,8 @@ namespace WpfApplication1
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Menu_Pop(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter1;
-        }
-        private bool MenuFilter1(object item)
-        {
-            return ((item as Musique).Genre.IndexOf(Button1.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
+            List<Musique> Pop = EMusique.Where(musique => musique.Genre == "Pop").ToList();
+            list.ItemsSource = Pop;
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -163,12 +157,8 @@ namespace WpfApplication1
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Menu_Rap(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter2;
-        }
-        private bool MenuFilter2(object item)
-        {
-            return ((item as Musique).Genre.IndexOf(Button2.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
+            List<Musique> Rap = EMusique.Where(musique => musique.Genre == "Rap").ToList();
+            list.ItemsSource = Rap;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -178,12 +168,8 @@ namespace WpfApplication1
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Menu_Electro(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter3;
-        }
-        private bool MenuFilter3(object item)
-        {
-            return ((item as Musique).Genre.IndexOf(Button3.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
+            List<Musique> Electro = EMusique.Where(musique => musique.Genre == "Electro").ToList();
+            list.ItemsSource = Electro;
         }
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -193,12 +179,8 @@ namespace WpfApplication1
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Menu_Rock(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter4;
-        }
-        private bool MenuFilter4(object item)
-        {
-            return ((item as Musique).Genre.IndexOf(Button4.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
+            List<Musique> Rock = EMusique.Where(musique => musique.Genre == "Rock").ToList();
+            list.ItemsSource = Rock;
         }
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -326,7 +308,7 @@ namespace WpfApplication1
         //////////////////////////////////////////////////////////////
         private void AugmenterSolde(object sender, RoutedEventArgs e)
         {
-            InputBox.Visibility = System.Windows.Visibility.Visible;
+            InputBox.Visibility = Visibility.Visible;
         }
         //////////////////////////////////////////////////////////////
 
@@ -359,15 +341,8 @@ namespace WpfApplication1
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.UpdateSolde();
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

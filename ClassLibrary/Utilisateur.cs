@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿
 
-namespace WpfApplication1
+namespace ClassLibrary
 {
-    public partial class Utilisateur
+    public class Utilisateur
     {
         private static string UserName;
         private static string Nom;

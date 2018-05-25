@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using ClassLibrary;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -47,14 +50,8 @@ namespace WpfApplication1
             bool wasCodeClosed = new StackTrace().GetFrames().FirstOrDefault(x => x.GetMethod() == typeof(Window).GetMethod("Close")) != null;
             if (!wasCodeClosed)
             {
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    Utilisateur Utilisateur = new Utilisateur();
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("DeleteUserPlaylist", sqlCon); // on appelle la procédure stockée "DeleteUserPlaylist", supprimant toutes les musiques qui ne possède pas de nom de playlist //
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLdelete SQLdelete = new SQLdelete();
+                SQLdelete.DeletePlaylist();
                 MesPlaylists MesPlaylists = new MesPlaylists();
                 MesPlaylists.Show();
             }
@@ -78,18 +75,8 @@ namespace WpfApplication1
                 {
                     list.Items.Add(son);
                     SetPlaylist(son);
-
-                    using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                    {
-                        Utilisateur Utilisateur = new Utilisateur();
-                        sqlCon.Open();
-                        SqlCommand cmd = new SqlCommand("EnregistrementPlaylist", sqlCon); // on appelle la procédure stockée "EnregistrementPlaylist, qui ajoute une musique dans la table UserPlaylist (sans nom de playlist pour le moment //
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NameSong", SelectBox.Text); // on récupère le nom de la musique //
-                        cmd.Parameters.AddWithValue("@NamePlaylist", ""); // on ne possède pas forcemment encore le nom de la playlist, nous l'ajouterons quand on cliquera sur le bouton "Creer" //
-                        cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // on récupère le nom d'utilisateur //
-                        cmd.ExecuteNonQuery(); // Exécute la procédure //
-                    }
+                    SQLupdate SQLupdate = new SQLupdate();
+                    SQLupdate.AjouterPlaylist(SelectBox.Text);
                 }
                 else
                     MessageBox.Show("Cette musique est déja dans la liste !", "Erreur");
@@ -110,14 +97,8 @@ namespace WpfApplication1
                 if (list.HasItems) // la liste doit contenir des musiques //
                 {
                     MessageBox.Show("Playlist créée !", "Succès");
-                    using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                    {
-                        sqlCon.Open();
-                        SqlCommand cmd = new SqlCommand("UpdatePlaylist", sqlCon); // on update la table UserPlaylist, en remplacant le nom de playlist par toutes les musiques qui n'en possèdent pas //
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@NamePlaylist", NomPlaylist.Text); // on récupère le nom de playlist //
-                        cmd.ExecuteNonQuery(); // Exécute la procédure //
-                    }
+                    SQLupdate SQLupdate = new SQLupdate();
+                    SQLupdate.UpdatePlaylist(NomPlaylist.Text);
                     MesPlaylists MesPlaylists = new MesPlaylists();
                     MesPlaylists.Show();
                     this.Close();
@@ -131,14 +112,8 @@ namespace WpfApplication1
 
         private void Retour(object sender, RoutedEventArgs e)
         {
-            using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-            {
-                Utilisateur Utilisateur = new Utilisateur();
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("DeleteUserPlaylist", sqlCon); // on appelle la procédure stockée "DeleteUserPlaylist", supprimant toutes les musiques qui ne possède pas de nom de playlist //
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.ExecuteNonQuery(); // Exécute la procédure //
-            }
+            SQLdelete SQLdelete = new SQLdelete();
+            SQLdelete.DeletePlaylist();
             MesPlaylists MesPlaylists = new MesPlaylists();
             MesPlaylists.Show();
             this.Close();

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -21,45 +23,32 @@ namespace WpfApplication1
             Utilisateur Utilisateur = new Utilisateur();
             NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-            using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
+            SQLselect SQLselect = new SQLselect();
+            LoadingPlaylists = SQLselect.ChargementPlaylist();
+
+            Musiques Musiques = new Musiques();
+            if (LoadingPlaylists.Count != 0)
             {
-
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("SELECT * from UserPlaylist WHERE UserName = @UserName;", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName());  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
-                cmd.ExecuteNonQuery(); // Execute la procédure //
-                SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
-                while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //
+                foreach (ListPlaylists playlist in LoadingPlaylists)
                 {
-                    LoadingPlaylists.Add(new ListPlaylists((string)reader[0], (string)reader[1])); // Ajoute dans la liste mesMusiques tous les noms de musique possédés par l'utilisateur actuel //
-                }
-                reader.Close();
-
-                Musiques Musiques = new Musiques();
-                if (LoadingPlaylists.Count != 0)
-                {
-                    foreach (ListPlaylists playlist in LoadingPlaylists)
+                    if (test == "")
                     {
-                        if (test == "")
-                        {
-                            test = playlist.NamePlaylist;
-                            eMusique = new List<Musique>();
-                        }
-                        if (playlist.NamePlaylist != test)
-                        {
-                            Playlist l = new Playlist(test, eMusique);
-                            SetPlaylist(l);
-                            test = playlist.NamePlaylist;
-                            eMusique = new List<Musique>();
-                        }
-                        eMusique.Add(Musiques.EMusique.Find(x => x.Titre == playlist.NameSong));
+                        test = playlist.NamePlaylist;
+                        eMusique = new List<Musique>();
                     }
-                    Playlist m = new Playlist(test, eMusique);
-                    SetPlaylist(m);
+                    if (playlist.NamePlaylist != test)
+                    {
+                        Playlist l = new Playlist(test, eMusique);
+                        SetPlaylist(l);
+                        test = playlist.NamePlaylist;
+                        eMusique = new List<Musique>();
+                    }
+                    eMusique.Add(Musiques.EMusique.Find(x => x.Titre == playlist.NameSong));
                 }
-                list.ItemsSource = GetListePlaylist();
+                Playlist m = new Playlist(test, eMusique);
+                SetPlaylist(m);
             }
+            list.ItemsSource = GetListePlaylist();
         }
 
 
@@ -185,15 +174,8 @@ namespace WpfApplication1
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.UpdateSolde();
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
@@ -246,17 +228,9 @@ namespace WpfApplication1
                 DeletePlaylist(i);
                 ICollectionView view = CollectionViewSource.GetDefaultView(list.ItemsSource);
                 view.Refresh();
-                Utilisateur Utilisateur = new Utilisateur();
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("DELETE FROM UserPlaylist WHERE UserName = @UserName and NamePlaylist = @NamePlaylist", sqlCon); // On créé une commande qui supprime une playlist //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@NamePlaylist", nom); // Cette procédure prend en paramètre le nom de la playlist //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                    DeleteButton.Visibility = Visibility.Hidden;
-                }
+                SQLdelete SQLdelete = new SQLdelete();
+                SQLdelete.SupprimerPlaylist(nom);
+                DeleteButton.Visibility = Visibility.Hidden;
             }
         }
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

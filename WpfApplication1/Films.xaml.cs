@@ -9,6 +9,9 @@ using System.Windows.Media;
 using System.Windows.Controls;
 using System.Data.SqlClient;
 using System.Data;
+using System.Linq;
+using ClassLibrary;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -127,86 +130,52 @@ namespace WpfApplication1
                 drawingContext.Pop();
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////// RECHERCE ///////////////////////////////////////////////
 
+        // TOUT ! //
 
-
-
-        // GENRE "TOUT" !!! //   
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void Menu_Tout(object sender, RoutedEventArgs e)
+        private void RechercheTout(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter;
+            list.ItemsSource = EFilms;
         }
-        private bool MenuFilter(object item)
+
+
+        // FANTASTIQUE ! //
+
+        private void RechercheFantastique ( object sender, RoutedEventArgs e)
         {
-            return ((item as Film).Genre.IndexOf(Button.Content.ToString(), StringComparison.OrdinalIgnoreCase) != 0);
+            List<Film> Fantastique =  EFilms.Where(film => film.Genre == "Fantastique").ToList();
+            list.ItemsSource = Fantastique;
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // DRAME ! //
 
-
-        // GENRE "FANTASTIQUE" !!! //
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void Menu_Fantastique(object sender, RoutedEventArgs e)
+        private void RechercheDrame(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter1;
+            List<Film> Drame = EFilms.Where(film => film.Genre == "Drame").ToList();
+            list.ItemsSource = Drame;
         }
-        private bool MenuFilter1(object item)
+
+        // COMEDIE ! // 
+
+        private void RechercheComedie(object sender, RoutedEventArgs e)
         {
-            return ((item as Film).Genre.IndexOf(Button1.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
+            List<Film> Comedie = EFilms.Where(film => film.Genre == "Comedie").ToList();
+            list.ItemsSource = Comedie;
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+        // HORREUR ! //
 
-
-        // GENRE "DRAME" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void Menu_Drame(object sender, RoutedEventArgs e)
+        private void RechercheHorreur(object sender, RoutedEventArgs e)
         {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter2;
+            List<Film> Horreur = EFilms.Where(film => film.Genre == "Horreur").ToList();
+            list.ItemsSource = Horreur;
         }
-        private bool MenuFilter2(object item)
-        {
-            return ((item as Film).Genre.IndexOf(Button2.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        ///////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-        // GENRE "COMEDIE" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void Menu_Comedie(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter3;
-        }
-        private bool MenuFilter3(object item)
-        {
-            return ((item as Film).Genre.IndexOf(Button3.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        // GENRE "HORREUR" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void Menu_Horreur(object sender, RoutedEventArgs e)
-        {
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
-            view.Filter = MenuFilter4;
-        }
-        private bool MenuFilter4(object item)
-        {
-            return ((item as Film).Genre.IndexOf(Button4.Content.ToString(), StringComparison.OrdinalIgnoreCase) >= 0);
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+        
 
         // DOUBLE CLIQUE SUR ITEM LIST ----> REDIRECTION SUR FILMS_PAGE !!! //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -352,15 +321,8 @@ namespace WpfApplication1
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.UpdateSolde();
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
@@ -372,5 +334,7 @@ namespace WpfApplication1
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
+
+        
     }
 }

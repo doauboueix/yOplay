@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -102,21 +104,8 @@ namespace WpfApplication1
                         Buy_Button.Foreground = new SolidColorBrush(Colors.White);
                         MesFilms MesFilms = new MesFilms();
                         MesFilms.SetList(film);
-                        using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                        {
-                            sqlCon.Open();
-                            SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde -= @Prix WHERE UserName = @UserName", sqlCon); // On créé une commande qui réduit le solde de l'utilisateur connecté //
-                            cmd.CommandType = CommandType.Text;
-                            cmd.Parameters.AddWithValue("@Prix", Prix); // Cette procédure prend en paramètre le prix du film acheté //
-                            cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
-                            cmd.ExecuteNonQuery(); // Exécute la procédure //
-
-                            SqlCommand cmd2 = new SqlCommand("AchatFilm", sqlCon); // On appelle la procédure stockée AchatFilm qui ajoute le nom d'un film + l'identifiant de l'utilisateur actuel //
-                            cmd2.CommandType = CommandType.StoredProcedure;
-                            cmd2.Parameters.AddWithValue("@Nom", label1.Content); // Cette procédure prend en paramètre le nom du film acheté //
-                            cmd2.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
-                            cmd2.ExecuteNonQuery(); // On exécute la procédure //
-                        }
+                        SQLupdate achat = new SQLupdate();
+                        achat.AchatFilm(label1.Content.ToString(),Prix);
                     }
                     else
                         MessageBox.Show("Fonds insuffisants, veuillez garnir votre solde !", "Erreur"); // si le solde est inférieur au prix, on affiche un message exprimant le fait que l'utilisateur n'a pas les fonds nécessaires //

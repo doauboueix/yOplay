@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
+using SQL;
 
 namespace WpfApplication1
 {
@@ -18,24 +20,12 @@ namespace WpfApplication1
             NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             list.ItemsSource = eFilm;
-            using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-            {
-                sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("ChargementMesFilms", sqlCon); // Appelle la procédure stockée ChargementMesFilms qui recupère le nom de tous les films pour l'utilisateur en cours //
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
-                cmd.ExecuteNonQuery(); // Execute la procédure //
-                SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
-                while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //
-                {
-                    mesFilms.Add((string)reader[0]); // Ajoute dans la liste mesFilms tous les noms de films possédés par l'utilisateur actuel //
-                }
-                reader.Close();
-                Films Films = new Films();
-                foreach (string film in mesFilms) // Pour chacun des noms de films présent dans cette liste, on cherche la correspondance avec l'objet "Film" en question //
-                    eFilm.Add(Films.EFilms.Find(x => x.Nom == film)); // On retourne l'objet correspond dans une list<Film> //
-                list.ItemsSource = eFilm; // On affiche tous les films possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
-            }
+            SQLselect SQLselect = new SQLselect();
+            mesFilms = SQLselect.ChargementMesFilms();
+            Films Films = new Films();
+            foreach (string film in mesFilms) // Pour chacun des noms de films présent dans cette liste, on cherche la correspondance avec l'objet "Film" en question //
+                eFilm.Add(Films.EFilms.Find(x => x.Nom == film)); // On retourne l'objet correspond dans une list<Film> //
+            list.ItemsSource = eFilm; // On affiche tous les films possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
         }
 
         // LIST : GET, SET !!! //
@@ -149,15 +139,8 @@ namespace WpfApplication1
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
-                {
-                    sqlCon.Open();
-                    SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde = @Solde WHERE UserName = @UserName", sqlCon); // créé une commande qui modifie le solde de l'utilisateur actuel //
-                    cmd.CommandType = CommandType.Text;
-                    cmd.Parameters.AddWithValue("@Solde", Utilisateur.GetSolde()); // cette commande prend en paramètre le solde de l'utilisateur //
-                    cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // elle doit donc récupérer le UserName de celui-ci //
-                    cmd.ExecuteNonQuery(); // Exécute la procédure //
-                }
+                SQLupdate SQLupdate = new SQLupdate();
+                SQLupdate.UpdateSolde();
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

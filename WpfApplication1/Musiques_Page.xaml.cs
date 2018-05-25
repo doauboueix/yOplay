@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClassLibrary;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows;
@@ -117,7 +118,7 @@ namespace WpfApplication1
                         Buy_Button.Foreground = new SolidColorBrush(Colors.White);
                         MesMusiques MesMusiques = new MesMusiques();
                         MesMusiques.SetList(musique);
-                        using (SqlConnection sqlCon = new SqlConnection(@" Data Source=192.168.42.106,49172 ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
+                        using (SqlConnection sqlCon = new SqlConnection(@" Data Source=DESKTOP-4F4HM0E\SQLExpress ; Initial Catalog=DataBaseProject ; Integrated Security=True;"))
                         {
                             sqlCon.Open();
                             SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde -= @Prix WHERE UserName = @UserName", sqlCon); // On créé une commande qui réduit le solde de l'utilisateur connecté //
@@ -126,10 +127,10 @@ namespace WpfApplication1
                             cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
                             cmd.ExecuteNonQuery(); // Exécute la procédure //
 
-                            SqlCommand cmd2 = new SqlCommand("AchatMusique", sqlCon); // On appelle la procédure stockée AchatMusique qui ajoute le nom d'un film + l'identifiant de l'utilisateur actuel //
+                            SqlCommand cmd2 = new SqlCommand("AchatMesMusiques", sqlCon); // On appelle la procédure stockée AchatMusique qui ajoute le nom d'un film + l'identifiant de l'utilisateur actuel //
                             cmd2.CommandType = CommandType.StoredProcedure;
-                            cmd2.Parameters.AddWithValue("@Name", label1.Content); // Cette procédure prend en paramètre le nom de la musique achetée //
-                            cmd2.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
+                            cmd2.Parameters.AddWithValue("@Titre", label1.Content); // Cette procédure prend en paramètre le nom de la musique achetée //
+                            cmd2.Parameters.AddWithValue("@Username", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
                             cmd2.ExecuteNonQuery(); // Exécute la procédure //
                         }
                     }
