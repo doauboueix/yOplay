@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -21,7 +18,7 @@ namespace WpfApplication1
             var items = MesMusiques.GetList();
             foreach (Musique musique in items)
             {
-                SelectBox.Items.Add(new ComboBoxItem { Content = musique.Titre.ToString() });
+                SelectBox.Items.Add(new ComboBoxItem { Content = musique.Titre.ToString() }); // On rempli la SelectBox de toutes les musiques que l'utilisateur possède // 
             }
             if (!SelectBox.HasItems)
                 SelectBox.Items.Add(new ComboBoxItem { Content = "Vous ne possédez pas de musique", IsEnabled = false });
@@ -48,10 +45,10 @@ namespace WpfApplication1
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             bool wasCodeClosed = new StackTrace().GetFrames().FirstOrDefault(x => x.GetMethod() == typeof(Window).GetMethod("Close")) != null;
-            if (!wasCodeClosed)
+            if (!wasCodeClosed) // Si la fenetre a été fermé par un click sur la croix X, on éxécute le code ci-dessous // 
             {
                 SQLdelete SQLdelete = new SQLdelete();
-                SQLdelete.DeletePlaylist();
+                SQLdelete.DeletePlaylist(); // on supprime toute les musiques enregistrées dans UserPlaylist qui ne possède pas de nom de playlist // 
                 MesPlaylists MesPlaylists = new MesPlaylists();
                 MesPlaylists.Show();
             }
@@ -98,7 +95,7 @@ namespace WpfApplication1
                 {
                     MessageBox.Show("Playlist créée !", "Succès");
                     SQLupdate SQLupdate = new SQLupdate();
-                    SQLupdate.UpdatePlaylist(NomPlaylist.Text);
+                    SQLupdate.UpdatePlaylist(NomPlaylist.Text); // On update toutes les musiques que l'on a ajouté dans UserPlaylist en rajoutant le nom de playlist //
                     MesPlaylists MesPlaylists = new MesPlaylists();
                     MesPlaylists.Show();
                     this.Close();
@@ -113,7 +110,7 @@ namespace WpfApplication1
         private void Retour(object sender, RoutedEventArgs e)
         {
             SQLdelete SQLdelete = new SQLdelete();
-            SQLdelete.DeletePlaylist();
+            SQLdelete.DeletePlaylist(); // On supprime toute les musiques qui ne sont lié à aucune playlist dans UserPlaylist, cad celles qui ne possèdent pas de nom de playlist //
             MesPlaylists MesPlaylists = new MesPlaylists();
             MesPlaylists.Show();
             this.Close();

@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using ClassLibrary;

@@ -8,8 +8,12 @@ namespace SQL
 {
     public class SQLdelete
     {
-        private SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString);
-        
+        private SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString);  // String de connexion stocké dans app.config de WpfApplication1 //
+
+
+
+        // Suppression playlist dans CreationPlaylist lorsqu'on quitte sur la croix X ou bouton retour //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void DeletePlaylist()
         {
             using (SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString))
@@ -21,7 +25,12 @@ namespace SQL
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        // Suppression playlist dans MesPlaylists //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void SupprimerPlaylist(string nom)
         {
             using (sqlCon)
@@ -35,5 +44,6 @@ namespace SQL
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

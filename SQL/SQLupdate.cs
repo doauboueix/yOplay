@@ -9,6 +9,10 @@ namespace SQL
     {
         private SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString);
 
+
+
+        // Mise à jour du solde //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void UpdateSolde()
         {
             using (sqlCon)
@@ -22,7 +26,12 @@ namespace SQL
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        // Ajout musique dans la table UserPlaylist //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void AjouterPlaylist(string NameSong)
         {
             using (sqlCon)
@@ -32,12 +41,17 @@ namespace SQL
                 SqlCommand cmd = new SqlCommand("EnregistrementPlaylist", sqlCon); // on appelle la procédure stockée "EnregistrementPlaylist, qui ajoute une musique dans la table UserPlaylist (sans nom de playlist pour le moment //
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@NameSong", NameSong); // on récupère le nom de la musique //
-                cmd.Parameters.AddWithValue("@NamePlaylist", ""); // on ne possède pas forcemment encore le nom de la playlist, nous l'ajouterons quand on cliquera sur le bouton "Creer" //
+                cmd.Parameters.AddWithValue("@NamePlaylist", ""); // on ne possède pas encore le nom de la playlist, nous l'ajouterons quand on cliquera sur le bouton "Creer" //
                 cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // on récupère le nom d'utilisateur //
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        // Ajoute le nom de playlist à la liste de musique qui constitue la playlist en cours de création //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void UpdatePlaylist(string NamePlaylist)
         {
             using (sqlCon)
@@ -49,7 +63,11 @@ namespace SQL
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+        // Achat film //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void AchatFilm ( string NomFilm , decimal Prix )
         {
             using (sqlCon)
@@ -69,7 +87,12 @@ namespace SQL
                 cmd2.ExecuteNonQuery(); // On exécute la procédure //
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+        // Créé un utilisateur dans la table UserTable //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         public void Inscription(string Nom, string Prenom, string UserName, string Password)
         {
             using (sqlCon)
@@ -85,5 +108,31 @@ namespace SQL
                 cmd.ExecuteNonQuery();
             }
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        // Achat musique //
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public void AcheterMusique(decimal Prix, string Nom)
+        {
+            using (sqlCon)
+            {
+                Utilisateur Utilisateur = new Utilisateur();
+                sqlCon.Open();
+                SqlCommand cmd = new SqlCommand("UPDATE UserTable SET Solde -= @Prix WHERE UserName = @UserName", sqlCon); // On créé une commande qui réduit le solde de l'utilisateur connecté //
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.AddWithValue("@Prix", Prix); // Cette procédure prend en paramètre le prix de la musique achetée //
+                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
+                cmd.ExecuteNonQuery(); // Exécute la procédure //
+
+                SqlCommand cmd2 = new SqlCommand("AchatMesMusiques", sqlCon); // On appelle la procédure stockée AchatMusique qui ajoute le nom d'un film + l'identifiant de l'utilisateur actuel //
+                cmd2.CommandType = CommandType.StoredProcedure;
+                cmd2.Parameters.AddWithValue("@Name", Nom); // Cette procédure prend en paramètre le nom de la musique achetée //
+                cmd2.Parameters.AddWithValue("@Username", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
+                cmd2.ExecuteNonQuery(); // Exécute la procédure //
+            }
+        }
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

@@ -22,7 +22,7 @@ namespace WpfApplication1
             {
                 Accueil Accueil = new Accueil();
                 Accueil.Show();
-                this.Show();
+                this.Close();
             }
             else
                 MessageBox.Show("Identifiant ou mot de passe incorrect", "Erreur");

@@ -19,7 +19,6 @@ namespace WpfApplication1
             Utilisateur Utilisateur = new Utilisateur();
             NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-            list.ItemsSource = eFilm;
             SQLselect SQLselect = new SQLselect();
             mesFilms = SQLselect.ChargementMesFilms();
             Films Films = new Films();

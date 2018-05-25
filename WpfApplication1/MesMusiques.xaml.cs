@@ -2,8 +2,6 @@
 using NAudio.Wave;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Media;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,7 +27,7 @@ namespace WpfApplication1
             NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             SQLselect SQLselect = new SQLselect();
-           mesMusiques = SQLselect.ChargementMesMusiques();
+            mesMusiques = SQLselect.ChargementMesMusiques();
             Musiques Musiques = new Musiques();
             foreach (string musique in mesMusiques) // Pour chacun des noms de musique présent dans cette liste, on cherche la correspondance avec l'objet "Musique" en question //
                 eMusique.Add(Musiques.EMusique.Find(x => x.Titre == musique)); // On retourne l'objet correspond dans une list<Musique> //

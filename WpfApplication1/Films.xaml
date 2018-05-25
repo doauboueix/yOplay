@@ -101,10 +101,10 @@
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#333333" Margin="0,0,0,575.667" Grid.RowSpan="2" />
             <Label Grid.ColumnSpan="2" Grid.Row="0" Content="Films"  FontSize="35" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" FontFamily="Lucida Sans Unicode" Foreground="White" Margin="427,15,393,15.667"/>
-            <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,35,34,35.667">
+            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <TextBlock Name="NomPrenom" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
             </StackPanel>
-            <StackPanel VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right" Margin="0,34,0,34.667">
+            <StackPanel VerticalAlignment="Center" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Right">
                 <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"  StaysOpen="False" Foreground="White">
                     <StackPanel Width="150">
                         <Button Content="Mon Compte" HorizontalAlignment="Center"/>
