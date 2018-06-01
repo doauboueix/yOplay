@@ -23,9 +23,6 @@ namespace WpfApplication1
         public Films()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             DataContext = this;
             EFilms.Add(new Film(15.99M, "Fantastique", "pack://application:,,,/WpfApplication1;component/adds/Film/TombRaider.jpg", "Tomb Raider", "Simon West", "Lara Croft, 21 ans, n'a ni projet, ni ambition : fille d'un explorateur excentrique porté disparu" + "\n" + "depuis sept ans, cette jeune femme rebelle et indépendante refuse de reprendre l'empire de" + "\n" + "son père. Convaincue qu'il n'est pas mort, elle met le cap sur la destination où son père a été" + "\n" + "vu pour la dernière fois : la tombe légendaire d'une île mythique au large du Japon. Mais le" + "\n" + "voyage se révèle des plus périlleux et il lui faudra affronter d'innombrables ennemis et" + "\n" + "repousser ses propres limites pour devenir...Tomb Raider...", "pack://application:,,,/WpfApplication1;component/adds/4etoiles.png"));
             EFilms.Add(new Film(15.99M, "Drame", "pack://application:,,,/WpfApplication1;component/adds/Film/Akira.jpg", "Akira", "Katsuhiro Ōtomo", "Le 16 juillet 1988, Tokyo est détruit. Trente - et - un ans plus tard, après la Troisième Guerre" + "\n" + "mondiale, en 2019, Neo - Tokyo est une mégalopole corrompue et sillonnée par des bandes" + "\n" + "de jeunes motards désœuvrés et drogués.Une nuit, l'un d'eux, Tetsuo, a un accident en" + "\n" + "essayant d'éviter ce qui semble être d'abord un jeune garçon mais qui a un visage de vieillard." + "\n" + "Il est capturé par l'armée et fait l'objet de nombreux tests dans le cadre d'un projet militaire" + "\n" + "secret visant à repérer et à former des êtres possédant des prédispositions à des pouvoirs" + "\n" + "psychiques (télépathie, téléportation, télékinésie…).", "pack://application:,,,/WpfApplication1;component/adds/4etoiles.png"));
@@ -46,8 +43,19 @@ namespace WpfApplication1
             list.ItemsSource = EFilms;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
             view.Filter = UserFilter;
+            UC.OnClosed += UCtitre_OnClosed;
+            UC.OnSolded += UCtitre_OnSolded;
         }
 
+        private void UCtitre_OnClosed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void UCtitre_OnSolded(object sender, EventArgs e)
+        {
+            InputBox.Visibility = Visibility.Visible;
+        }
 
         // BARRE DE RECHERCHE !!! //
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -319,7 +327,7 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+                UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
 
@@ -333,7 +341,7 @@ namespace WpfApplication1
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        
     }
 }

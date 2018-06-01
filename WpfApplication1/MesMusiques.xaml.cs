@@ -23,18 +23,25 @@ namespace WpfApplication1
         public MesMusiques()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             SQLselect SQLselect = new SQLselect();
             mesMusiques = SQLselect.ChargementMesMusiques();
             Musiques Musiques = new Musiques();
             foreach (string musique in mesMusiques) // Pour chacun des noms de musique présent dans cette liste, on cherche la correspondance avec l'objet "Musique" en question //
                 eMusique.Add(Musiques.EMusique.Find(x => x.Titre == musique)); // On retourne l'objet correspond dans une list<Musique> //
             list.ItemsSource = eMusique; // On affiche toutes les musiques possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
+            UC.OnClosed += UCtitre_OnClosed;
+            UC.OnSolded += UCtitre_OnSolded;
         }
 
+        private void UCtitre_OnClosed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void UCtitre_OnSolded(object sender, EventArgs e)
+        {
+            InputBox.Visibility = Visibility.Visible;
+        }
 
         // LIST : GET, SET !!! //
         //////////////////////////////////////////////
@@ -164,7 +171,7 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+                UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
 

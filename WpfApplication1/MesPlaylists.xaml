@@ -67,11 +67,6 @@
             </StackPanel>
         </Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="0.9*"/>
-                <ColumnDefinition Width="0.07*"/>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="95" />
                 <RowDefinition Height="30"/>
@@ -82,22 +77,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#333333" />
-            <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Mes Playlists" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="229" FontFamily="Lucida Sans Unicode" Foreground="White"/>
-            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Name="NomPrenom" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Grid.Column="2" Grid.Row="0"  HorizontalAlignment="Right">
-                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"  StaysOpen="False" Foreground="White">
-                    <StackPanel Width="150">
-                        <Button Content="Mon Compte" HorizontalAlignment="Center"/>
-                        <Label Name="Solde" FontSize="13" FontStyle="Italic" HorizontalAlignment="Center"/>
-                        <Button Content="Ajouter Solde" Click="AugmenterSolde" HorizontalAlignment="Center"/>
-                        <Button Content="Aide" HorizontalAlignment="Center"/>
-                        <Separator/>
-                        <Button Content="Se déconnecter" Click="SeDeconnecter" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </materialDesign:PopupBox>
-            </StackPanel>
+            <local:UCtitre x:Name="UC" Titre="Mes Playlists" HorizontalAlignment="Right" Grid.RowSpan="2" Width="954"/>
+
             <Button Content="Créer Playlist" Click="Playlist" Grid.Row="2" Grid.ColumnSpan="3" Width="140" />
             <ListView Name="list" MouseDoubleClick="Page_Playlist" Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Center" Width="300" PreviewMouseLeftButtonUp="AfficherBouton">
                 <ListView.ItemContainerStyle>
@@ -119,7 +100,7 @@
             <Button Name="DeleteButton" Content="Supprimer" Click="Supprimer" Grid.Row="6" Grid.ColumnSpan="3" VerticalAlignment="Top" Width="100" Visibility="Hidden" />
             
             <!-- L'InputBox pour ajouter un solde -->
-            <Grid Grid.RowSpan="5" Grid.ColumnSpan="3">
+            <Grid Grid.RowSpan="7" Grid.ColumnSpan="3">
                 <Grid x:Name="InputBox" Visibility="Collapsed">
                     <Grid Background="Black" Opacity="0.5"/>
                     <Border

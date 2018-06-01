@@ -60,33 +60,38 @@
             </StackPanel>
         </Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.9*" />
-                <ColumnDefinition Width="0.07*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="95" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0" Grid.ColumnSpan="3" Background="#333333" />
-            <Label Grid.Row="0" Grid.ColumnSpan="3" Content="Mes Films" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center" Width="190" FontFamily="Lucida Sans Unicode" Foreground="White"/>
-            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Name="NomPrenom" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Grid.Column="2" HorizontalAlignment="Right">
-                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"  StaysOpen="False" Foreground="White">
-                    <StackPanel Width="150">
-                        <Button Content="Mon Compte" HorizontalAlignment="Center"/>
-                        <Label Name="Solde" FontSize="13" FontStyle="Italic" HorizontalAlignment="Center"/>
-                        <Button Content="Ajouter Solde" Click="AugmenterSolde" HorizontalAlignment="Center"/>
-                        <Button Content="Aide" HorizontalAlignment="Center"/>
-                        <Separator/>
-                        <Button Content="Se déconnecter" Click="SeDeconnecter" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </materialDesign:PopupBox>
-            </StackPanel>
-            <ListView Name="list"  ItemsSource="{Binding listFilm}" Grid.Row="1" Grid.ColumnSpan="3" >
+            <local:UCtitre x:Name="UC" Titre="Mes Films" HorizontalAlignment="Right" Grid.RowSpan="2" Width="954"/>
+
+            <!-- L'InputBox pour ajouter un solde -->
+            <Grid Grid.RowSpan="2" Grid.ColumnSpan="3" Canvas.ZIndex="2">
+                <Grid x:Name="InputBox" Visibility="Collapsed">
+                    <Grid Background="Black" Opacity="0.5"/>
+                    <Border
+            MinWidth="250"
+            Background="#FF0097FF" 
+            BorderBrush="Black" 
+            BorderThickness="1" 
+            CornerRadius="0,55,0,55" 
+            HorizontalAlignment="Center" 
+            VerticalAlignment="Center">
+                        <StackPanel>
+                            <TextBlock Margin="5" Text="Ajouter Solde:" FontWeight="Bold" FontFamily="Lucida Sans Unicode" Foreground="White"/>
+                            <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Name="InputTextBox" Background="White" Foreground="Black" FontFamily="Lucida Sans Unicode"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Name="ValidButton" Margin="5" Content="Valider" Click="Valider_Click"/>
+                                <Button Name="CancelButton" Margin="5" Content="Annuler" Click="Annuler_Click" />
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Grid>
+
+            <ListView Name="list"  ItemsSource="{Binding listFilm}" Grid.Row="1" Canvas.ZIndex="1">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -123,30 +128,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            
-            <!-- L'InputBox pour ajouter un solde -->
-            <Grid Grid.RowSpan="2" Grid.ColumnSpan="3">
-                <Grid x:Name="InputBox" Visibility="Collapsed">
-                    <Grid Background="Black" Opacity="0.5"/>
-                    <Border
-            MinWidth="250"
-            Background="#FF0097FF" 
-            BorderBrush="Black" 
-            BorderThickness="1" 
-            CornerRadius="0,55,0,55" 
-            HorizontalAlignment="Center" 
-            VerticalAlignment="Center">
-                        <StackPanel>
-                            <TextBlock Margin="5" Text="Ajouter Solde:" FontWeight="Bold" FontFamily="Lucida Sans Unicode" Foreground="White"/>
-                            <TextBox MinWidth="150" HorizontalAlignment="Center" VerticalAlignment="Center" Name="InputTextBox" Background="White" Foreground="Black" FontFamily="Lucida Sans Unicode"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Name="ValidButton" Margin="5" Content="Valider" Click="Valider_Click"/>
-                                <Button Name="CancelButton" Margin="5" Content="Annuler" Click="Annuler_Click" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </Grid>
         </Grid>
     </DockPanel>
 </Window>

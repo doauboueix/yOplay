@@ -10,9 +10,7 @@ namespace WpfApplication1
         public Accueil()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Content = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+ 
         }
 
 
@@ -82,7 +80,7 @@ namespace WpfApplication1
                 MessageBox.Show("Vous n'avez entré aucune valeur !", "Erreur");
             else if (cpt != 0) // si le compteur n'est pas égal à 0 //
             {
-                MessageBox.Show("Format valide (Entiers uniquement) !", "Erreur format"); // on affiche un message indiquant que le format n'est pas respecté //
+                MessageBox.Show("Format invalide (Entiers uniquement) !", "Erreur format"); // on affiche un message indiquant que le format n'est pas respecté //
                 InputTextBox.Text = String.Empty; // on réinitialise le contenu de la textbox //
             }
             else

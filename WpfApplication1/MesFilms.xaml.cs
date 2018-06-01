@@ -1,8 +1,6 @@
 ﻿using ClassLibrary;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using SQL;
@@ -17,16 +15,26 @@ namespace WpfApplication1
         {
             InitializeComponent();
             Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             SQLselect SQLselect = new SQLselect();
             mesFilms = SQLselect.ChargementMesFilms();
             Films Films = new Films();
             foreach (string film in mesFilms) // Pour chacun des noms de films présent dans cette liste, on cherche la correspondance avec l'objet "Film" en question //
                 eFilm.Add(Films.EFilms.Find(x => x.Nom == film)); // On retourne l'objet correspond dans une list<Film> //
             list.ItemsSource = eFilm; // On affiche tous les films possédés par l'utilisateur dans la ListView en indiquant la source de celle-ci //
+            UC.OnClosed += UCtitre_OnClosed;
+            UC.OnSolded += UCtitre_OnSolded;
         }
 
+        private void UCtitre_OnClosed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void UCtitre_OnSolded(object sender, EventArgs e)
+        {
+                InputBox.Visibility = Visibility.Visible;
+        }
+        
         // LIST : GET, SET !!! //
         //////////////////////////////////////////////
         public List<Film> GetList()
@@ -89,28 +97,6 @@ namespace WpfApplication1
 
 
 
-        // MENU COMPTE UTILISATEUR !!! //
-        ///////////////////////////////////////////////////////////////////////
-        private void SeDeconnecter(object sender, RoutedEventArgs e)
-        {
-            MainWindow MainWindow = new MainWindow();
-            MainWindow.Show();
-            this.Close();
-        }
-        ///////////////////////////////////////////////////////////////////////
-
-
-
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
-        private void AugmenterSolde(object sender, RoutedEventArgs e)
-        {
-            InputBox.Visibility = Visibility.Visible;
-        }
-        //////////////////////////////////////////////////////////////
-
-
-
         // INPUT BOX //
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         private void Valider_Click(object sender, RoutedEventArgs e)
@@ -130,17 +116,17 @@ namespace WpfApplication1
                 MessageBox.Show("Vous n'avez entré aucune valeur !", "Erreur");
             else if (cpt != 0) // si le compteur n'est pas égal à 0 //
             {
-                MessageBox.Show("Format valide (Entiers uniquement) !", "Erreur format"); // on affiche un message indiquant que le format n'est pas respecté //
+                MessageBox.Show("Format invalide (Entiers uniquement) !", "Erreur format"); // on affiche un message indiquant que le format n'est pas respecté //
                 InputTextBox.Text = String.Empty; // on réinitialise le contenu de la textbox //
             }
             else
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+                
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
-
+                UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
             }

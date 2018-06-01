@@ -23,9 +23,6 @@ namespace WpfApplication1
         public Musiques()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             DataContext = this;
             EMusique.Add(new Musique(2.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/God'sPlan.jpg", "God's Plan", "Drake", "Scorpion", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\God'sPlan.wav"));
             EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/Rockstar.jpg", "Rockstar", "Post Malone & 21 Savage", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Rockstar.wav"));
@@ -46,6 +43,18 @@ namespace WpfApplication1
             list.ItemsSource = EMusique;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
             view.Filter = UserFilter;
+            UC.OnClosed += UCtitre_OnClosed;
+            UC.OnSolded += UCtitre_OnSolded;
+        }
+
+        private void UCtitre_OnClosed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void UCtitre_OnSolded(object sender, EventArgs e)
+        {
+            InputBox.Visibility = Visibility.Visible;
         }
 
         // BARRE DE RECHERCHE !!! //
@@ -340,7 +349,7 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+                UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
 

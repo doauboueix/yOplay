@@ -20,9 +20,6 @@ namespace WpfApplication1
         public MesPlaylists()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
-            NomPrenom.Text = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
-            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
             SQLselect SQLselect = new SQLselect();
             LoadingPlaylists = SQLselect.ChargementPlaylist();
 
@@ -49,9 +46,19 @@ namespace WpfApplication1
                 SetPlaylist(m);
             }
             list.ItemsSource = GetListePlaylist();
+            UC.OnClosed += UCtitre_OnClosed;
+            UC.OnSolded += UCtitre_OnSolded;
         }
 
+        private void UCtitre_OnClosed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
+        private void UCtitre_OnSolded(object sender, EventArgs e)
+        {
+            InputBox.Visibility = Visibility.Visible;
+        }
 
         // GET/SET/REMOVE PLAYLIST //
         /////////////////////////////////////////////////////////
@@ -173,7 +180,7 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
+                UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
 

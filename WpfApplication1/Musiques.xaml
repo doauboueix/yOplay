@@ -96,33 +96,14 @@
             </StackPanel>
         </Grid>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="0.9*" />
-                <ColumnDefinition Width="0.07*" />
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="69" />
                 <RowDefinition Height="30"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Border Grid.RowSpan="2" Grid.ColumnSpan="4" Background="#333333" />
-            <Label Grid.ColumnSpan="3" Grid.RowSpan="2" Content="Musiques" Foreground="White" FontSize="35" HorizontalAlignment="Center" VerticalAlignment="Center" Width="174" FontFamily="Lucida Sans Unicode" />
-            <StackPanel Grid.Column="1" Grid.RowSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Name="NomPrenom" VerticalAlignment="Center" FontSize="18" Foreground="White"/>
-            </StackPanel>
-            <StackPanel VerticalAlignment="Center" Grid.Column="2" Grid.RowSpan="2" HorizontalAlignment="Right">
-                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges"  StaysOpen="False" Foreground="White">
-                    <StackPanel Width="150">
-                        <Button Content="Mon Compte" HorizontalAlignment="Center"/>
-                        <Label Name="Solde" FontSize="13" FontStyle="Italic" HorizontalAlignment="Center"/>
-                        <Button Content="Ajouter Solde" Click="AugmenterSolde" HorizontalAlignment="Center"/>
-                        <Button Content="Aide" HorizontalAlignment="Center"/>
-                        <Separator/>
-                        <Button Content="Se déconnecter" Click="SeDeconnecter" HorizontalAlignment="Center"/>
-                    </StackPanel>
-                </materialDesign:PopupBox>
-            </StackPanel>
+            <local:UCtitre x:Name="UC" Titre="Musiques" HorizontalAlignment="Right" Grid.RowSpan="2" Width="954"/>
+
             <ListView MouseDoubleClick="List_MouseDoubleClick" Name="list" Grid.Row="2" Grid.ColumnSpan="3">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
