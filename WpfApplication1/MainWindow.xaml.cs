@@ -18,13 +18,14 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void Connexion(object sender, RoutedEventArgs e)
         {
-            SQLselect SQLselect = new SQL.SQLselect();
+            SQLselect SQLselect = new SQLselect();
             int i = SQLselect.SQLConnexion(login.Text, mdp.Password);
             if (i == 1)
             {
                 Accueil Accueil = new Accueil();
                 Accueil.Show();
                 this.Close();
+
             }
             else
                 MessageBox.Show("Identifiant ou mot de passe incorrect", "Erreur");

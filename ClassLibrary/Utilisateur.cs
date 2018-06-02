@@ -1,17 +1,20 @@
 ﻿
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
     public class Utilisateur
     {
-        private static string UserName;
-        private static string Nom;
-        private static string Prenom;
-        private static decimal Solde;
+        private static Utilisateur CurrentUtilisateur;
+        private string UserName;
+        private string Nom;
+        private string Prenom;
+        private decimal Solde;
+        private static Dictionary<ListPlaylists, string> dictionary;
 
         public Utilisateur()
         {
-
+            CurrentUtilisateur = this;
         }
         
         ////////////////////////////////////////////////
@@ -66,6 +69,18 @@ namespace ClassLibrary
         public void ReduireSolde(decimal solde)
         {
             Solde -= solde;
+        }
+        ////////////////////////////////////////////////
+
+        public Dictionary<ListPlaylists, string> GetDictionary()
+        {
+            return dictionary;
+        }
+        ////////////////////////////////////////////////
+
+        public void SetDictionary(ListPlaylists list, string username)
+        {
+            dictionary.Add(list, username);
         }
         ////////////////////////////////////////////////
     }

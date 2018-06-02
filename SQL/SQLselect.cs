@@ -10,7 +10,7 @@ namespace SQL
     public class SQLselect
     {
         private SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString);
-
+        private static Utilisateur CurrentUtilisateur;
 
 
         /// <summary>
@@ -46,6 +46,7 @@ namespace SQL
                         Utilisateur.SetSolde((decimal)reader[2]); // Recupere le Solde //
                     }
                     reader.Close(); // on ferme le reader une fois l'action terminée //
+                    CurrentUtilisateur = Utilisateur;
                     return 1;
                 }
                 else
