@@ -47,18 +47,37 @@ namespace WpfApplication1
             UC.OnSolded += UCtitre_OnSolded;
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnClosed du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnClosed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnSolded du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnSolded(object sender, EventArgs e)
         {
             InputBox.Visibility = Visibility.Visible;
         }
 
-        // BARRE DE RECHERCHE !!! //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Barre de recherche
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns> True si la barre est vide ou tous les items dont le texte de la barre de recherche correspond à un élément d'un film </returns>
         private bool UserFilter(object item)
         {
             if (String.IsNullOrEmpty(txtFilter.Text))
@@ -67,17 +86,26 @@ namespace WpfApplication1
                 return ((item as Film).Nom.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) || ((item as Film).Realisateur.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) || ((item as Film).Genre.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0) || ((item as Film).Prix.ToString().IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
 
         }
+
+
+
+        /// <summary>
+        /// Raffraichit la liste et affiche tous les items que la barre de recherche a trouvé 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(list.ItemsSource).Refresh();
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-
-        // TRI PAR COLONNE !!! //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Tri par colonne
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Column_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -98,7 +126,11 @@ namespace WpfApplication1
             list.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
-        // CLASS SORTADORNER //
+
+
+        /// <summary>
+        /// Class SortAdorner
+        /// </summary>
         public class SortAdorner : Adorner
         {
             private static Geometry ascGeometry =
@@ -115,6 +147,12 @@ namespace WpfApplication1
                 this.Direction = dir;
             }
 
+
+
+            /// <summary>
+            /// Redéfinition de la méthode OnRender
+            /// </summary>
+            /// <param name="drawingContext"></param>
             protected override void OnRender(DrawingContext drawingContext)
             {
                 base.OnRender(drawingContext);
@@ -137,55 +175,79 @@ namespace WpfApplication1
                 drawingContext.Pop();
             }
         }
-        ////////////////////////////////////////// RECHERCE ///////////////////////////////////////////////
 
-        // TOUT ! //
 
+
+        /// <summary>
+        /// Bouton Tout ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RechercheTout(object sender, RoutedEventArgs e)
         {
             list.ItemsSource = EFilms;
         }
 
 
-        // FANTASTIQUE ! //
 
-        private void RechercheFantastique ( object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Bouton Fantastique ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RechercheFantastique(object sender, RoutedEventArgs e)
         {
-            List<Film> Fantastique =  EFilms.Where(film => film.Genre == "Fantastique").ToList();
+            List<Film> Fantastique = EFilms.Where(film => film.Genre == "Fantastique").ToList();
             list.ItemsSource = Fantastique;
         }
 
-        // DRAME ! //
 
+
+        /// <summary>
+        /// Bouton Drame ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RechercheDrame(object sender, RoutedEventArgs e)
         {
             List<Film> Drame = EFilms.Where(film => film.Genre == "Drame").ToList();
             list.ItemsSource = Drame;
         }
 
-        // COMEDIE ! // 
 
+
+        /// <summary>
+        /// Bouton Comedie ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RechercheComedie(object sender, RoutedEventArgs e)
         {
             List<Film> Comedie = EFilms.Where(film => film.Genre == "Comedie").ToList();
             list.ItemsSource = Comedie;
         }
 
-        // HORREUR ! //
 
+
+        /// <summary>
+        /// Bouton Horreur ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RechercheHorreur(object sender, RoutedEventArgs e)
         {
             List<Film> Horreur = EFilms.Where(film => film.Genre == "Horreur").ToList();
             list.ItemsSource = Horreur;
         }
 
-        ///////////////////////////////////////////////////////////////////////////////////////////
 
 
-        
-
-        // DOUBLE CLIQUE SUR ITEM LIST ----> REDIRECTION SUR FILMS_PAGE !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Double Clique sur un item de la ListView --> Redirection vers Fils_Page
+        /// Affiche l'item séléctionné avec possibilité d'achat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DependencyObject originalSource = (DependencyObject)e.OriginalSource;
@@ -209,35 +271,68 @@ namespace WpfApplication1
                 this.Close();
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // MENU MATERIAL DESIGN !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Accueil du Menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Mes Films du menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesFilms(object sender, RoutedEventArgs e)
         {
             MesFilms MesFilms = new MesFilms();
             MesFilms.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -275,34 +370,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        //////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // MENU COMPTE UTILISATEUR !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////
-        private void SeDeconnecter(object sender, RoutedEventArgs e)
-        {
-            MainWindow MainWindow = new MainWindow();
-            MainWindow.Show();
-            this.Close();
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
-        private void AugmenterSolde(object sender, RoutedEventArgs e)
-        {
-            InputBox.Visibility = Visibility.Visible;
-        }
-        //////////////////////////////////////////////////////////////
-
-
-
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -336,12 +411,17 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     }
 }

@@ -33,48 +33,86 @@ namespace WpfApplication1
             UC.OnSolded += UCtitre_OnSolded;
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnClosed du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnClosed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnSolded du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnSolded(object sender, EventArgs e)
         {
             InputBox.Visibility = Visibility.Visible;
         }
 
-        // LIST : GET, SET !!! //
-        //////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Méthode GET de eMusique
+        /// </summary>
+        /// <returns></returns>
         public List<Musique> GetList()
         {
             return eMusique;
         }
+
+
+
+        /// <summary>
+        /// Méthode SET de eMusique
+        /// </summary>
+        /// <param name="musique"></param>
         public void SetList(Musique musique)
         {
             eMusique.Add(musique);
         }
-        //////////////////////////////////////////////
 
 
 
-        // OUVERTURE/FERMETURE MENU //
-        ///////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
+
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
-        ///////////////////////////////////////////////////////////////////////
 
 
 
-        // CLICK ITEM MATERIAL DESIGN MENU //
-        ///////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// Si une musique est en cours de lecture, elle est arrêtée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
@@ -83,6 +121,15 @@ namespace WpfApplication1
                 SoundPlayer.Stop();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton MesPlaylists renvoyant vers la page MesPlaylists
+        /// Si une musique est en cours de lecture, elle est arrêtée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesPlaylists(object sender, RoutedEventArgs e)
         {
             MesPlaylists MesPlaylists = new MesPlaylists();
@@ -92,6 +139,13 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page Musiques 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             Musiques Musiques = new Musiques();
@@ -100,6 +154,14 @@ namespace WpfApplication1
                 SoundPlayer.Stop();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -117,36 +179,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        ///////////////////////////////////////////////////////////////////////
 
 
 
-        // SE DECONNECTER //
-        ////////////////////////////////////////////////////////////////
-        private void SeDeconnecter(object sender, RoutedEventArgs e)
-        {
-            MainWindow MainWindow = new MainWindow();
-            MainWindow.Show();
-            if (Stop.Visibility == Visibility.Visible)
-                SoundPlayer.Stop();
-            this.Close();
-        }
-        /////////////////////////////////////////////////////////////////
-
-
-
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
-        private void AugmenterSolde(object sender, RoutedEventArgs e)
-        {
-            InputBox.Visibility = System.Windows.Visibility.Visible;
-        }
-        //////////////////////////////////////////////////////////////
-
-
-
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -180,31 +220,39 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton Annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-
-        /// PLAYER ///
-
-        // RETURN MUSIC DURATION !!! //
-        ////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Méthode calculant la durée d'un fichier .wav
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns> Durée du fichier .wav </returns>
         public static TimeSpan GetWavFileDuration(string fileName)
         {
             WaveFileReader wf = new WaveFileReader(fileName);
             return wf.TotalTime;
         }
-        ///////////////////////////////////////////////////////////////
 
 
 
-        // Boutton "Play" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Lit la musique de l'item de la ListView sélectionné
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonPlay(object sender, MouseButtonEventArgs e)
         {
             Musique musique = list.SelectedItem as Musique;
@@ -221,24 +269,29 @@ namespace WpfApplication1
                 ActivateTimer();
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // Boutton "STOP" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Stop du Lecteur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonStop(object sender, MouseButtonEventArgs e)
         {
             Timer.Stop();
             SoundPlayer.Stop();
             AffichageStop();
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // Boutton "BACK" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Joue la musique qui se trouve à la position -1 que la musique en cours ( position dans la ListView ) 
+        /// Si la musique en cours est la première dans la ListView, cette méthode ne fait rien
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonBack(object sender, MouseButtonEventArgs e)
         {
             int i = list.SelectedIndex - 1;
@@ -254,12 +307,15 @@ namespace WpfApplication1
                 Back_Next(musique);
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // Boutton "NEXT" !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Joue la musique qui se trouve à la position +1 que la musique en cours ( position dans la ListView ) 
+        /// Si la musique en cours est la dernère dans la ListView, cette méthode ne fait rien
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNext(object sender, MouseButtonEventArgs e)
         {
             int cpt = list.Items.Count;
@@ -276,12 +332,12 @@ namespace WpfApplication1
                 Back_Next(musique);
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // TIMER !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Active un timer
+        /// </summary>
         private void ActivateTimer()
         {
             Timer = new DispatcherTimer();
@@ -290,6 +346,13 @@ namespace WpfApplication1
             Timer.Start();
         }
 
+
+
+        /// <summary>
+        /// Méthode qui affiche un timer pour la musique en cours 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             string a = "";
@@ -318,11 +381,12 @@ namespace WpfApplication1
                 AffichageStop();
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-        // AFFICHAGE //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        /// <summary>
+        /// Affiche le bouton play, aucune musique n'est en cours de lecture
+        /// </summary>
         private void AffichagePlay()
         {
             Play.Visibility = Visibility.Collapsed;
@@ -333,6 +397,12 @@ namespace WpfApplication1
             TimeLeft.Visibility = Visibility.Visible;
             NameSon.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Affiche le bouton stop, cela signifie qu'une musique est en cours de lecture
+        /// </summary>
         private void AffichageStop()
         {
             Stop.Visibility = Visibility.Collapsed;
@@ -341,12 +411,13 @@ namespace WpfApplication1
             TimeLeft.Visibility = Visibility.Hidden;
             NameSon.Visibility = Visibility.Hidden;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
 
 
 
-        //   Si l'élément précédent ou suivant est non null, execution de ce code   //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Méthode appellée dans ButtonBack et ButtonNext réinitialisant l'affichage (timer + progressionBar)
+        /// </summary>
+        /// <param name="musique"></param>
         private void Back_Next(Musique musique)
         {
             if (musique != null)
@@ -368,6 +439,5 @@ namespace WpfApplication1
                 ActivateTimer();
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

@@ -7,7 +7,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
-using System.Data.SqlClient;
 using System.Data;
 using ClassLibrary;
 using System.Linq;
@@ -24,6 +23,9 @@ namespace WpfApplication1
         {
             InitializeComponent();
             DataContext = this;
+
+            // PC DE NATHAN //
+            /*
             EMusique.Add(new Musique(2.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/God'sPlan.jpg", "God's Plan", "Drake", "Scorpion", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\God'sPlan.wav"));
             EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/Rockstar.jpg", "Rockstar", "Post Malone & 21 Savage", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Rockstar.wav"));
             EMusique.Add(new Musique(1.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Friends.jpg", "Friends", "Marshmello & Anne-Marie", "Speak your Mind", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Friends.wav"));
@@ -40,6 +42,25 @@ namespace WpfApplication1
             EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/AllTheStars.jpg", "All the Stars", "Kendrick Lamar & SZA", "Black Panther", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\AllTheStars.wav"));
             EMusique.Add(new Musique(0.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/LikeIDo.jpg", "Like I do", "David Guetta & Martin Garrix & Brooks", "", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\LikeIDo.wav"));
             EMusique.Add(new Musique(2.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/Disillusioned.jpg", "Disillusioned", "A Perfect Circle", "Eat the Elephant", @"C:\Users\Nathan\Desktop\yoplay\WpfApplication1\adds\Media\Disillusioned.wav"));
+            */
+
+            // PC DE DORIAN // 
+            EMusique.Add(new Musique(2.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/God'sPlan.jpg", "God's Plan", "Drake", "Scorpion", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\God'sPlan.wav"));
+            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/Rockstar.jpg", "Rockstar", "Post Malone & 21 Savage", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Rockstar.wav"));
+            EMusique.Add(new Musique(1.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Friends.jpg", "Friends", "Marshmello & Anne-Marie", "Speak your Mind", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Friends.wav"));
+            EMusique.Add(new Musique(3.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/SafariSong.jpg", "Safari Song", "Greta Van Fleet", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\SafariSong.wav"));
+            EMusique.Add(new Musique(3.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Havana.jpg", "Havana", "Camila Cabello", "Camila", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Havana.wav"));
+            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/King'sDead.jpg", "King's Dead", "Jay Rock & Kendrick Lamar & Future", "Black Panther", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\King'sDead.wav"));
+            EMusique.Add(new Musique(2.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/Lullaby.jpg", "Lullaby", "R3HAB & Mike Williams", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Lullaby.wav"));
+            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/RedColdRiver.jpg", "Red Cold River", "Breaking Benjamin", "Ember", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\RedColdRiver.wav"));
+            EMusique.Add(new Musique(1.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/IDGAF.jpg", "IDGAF", "Dua Lipa", "Dua Lipa", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\IDGAF.wav"));
+            EMusique.Add(new Musique(0.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/LookAlive.jpg", "Look Alive", "BlocBoy JB & Drake", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\LookAlive.wav"));
+            EMusique.Add(new Musique(3.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/ColdAsStone.jpg", "Cold as Stone", "Kaskade & Charlotte Lawrence", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\ColdAsStone.wav"));
+            EMusique.Add(new Musique(1.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/TheMountain.jpg", "The Mountain", "Three Days Grace", "Outsider", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\TheMountain.wav"));
+            EMusique.Add(new Musique(0.99M, "Pop", "pack://application:,,,/WpfApplication1;component/adds/Musique/Delicate.jpg", "Delicate", "Taylor Swift", "reputation", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Delicate.wav"));
+            EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/AllTheStars.jpg", "All the Stars", "Kendrick Lamar & SZA", "Black Panther", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\AllTheStars.wav"));
+            EMusique.Add(new Musique(0.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/LikeIDo.jpg", "Like I do", "David Guetta & Martin Garrix & Brooks", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\LikeIDo.wav"));
+            EMusique.Add(new Musique(2.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/Disillusioned.jpg", "Disillusioned", "A Perfect Circle", "Eat the Elephant", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Disillusioned.wav"));
             list.ItemsSource = EMusique;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
             view.Filter = UserFilter;
@@ -47,18 +68,37 @@ namespace WpfApplication1
             UC.OnSolded += UCtitre_OnSolded;
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnClosed du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnClosed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnSolded du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnSolded(object sender, EventArgs e)
         {
             InputBox.Visibility = Visibility.Visible;
         }
 
-        // BARRE DE RECHERCHE !!! //
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Barre de recherche
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns> True si la barre est vide ou tous les items dont le texte de la barre de recherche correspond à un élément d'une musique </returns>
         private bool UserFilter(object item)
         {
             if (String.IsNullOrEmpty(txtFilter.Text))
@@ -68,16 +108,25 @@ namespace WpfApplication1
 
         }
 
+
+
+        /// <summary>
+        /// Raffraichit la liste et affiche tous les items que la barre de recherche a trouvé 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionViewSource.GetDefaultView(list.ItemsSource).Refresh();
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // TRI PAR COLONNE !!! //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Tri par colonne
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Column_Click(object sender, RoutedEventArgs e)
         {
             GridViewColumnHeader column = (sender as GridViewColumnHeader);
@@ -98,7 +147,11 @@ namespace WpfApplication1
             list.Items.SortDescriptions.Add(new SortDescription(sortBy, newDir));
         }
 
-        // CLASS SORTADORNER //
+
+
+        /// <summary>
+        /// Class SortAdorner
+        /// </summary>
         public class SortAdorner : Adorner
         {
             private static Geometry ascGeometry =
@@ -115,6 +168,12 @@ namespace WpfApplication1
                 this.Direction = dir;
             }
 
+
+
+            /// <summary>
+            /// Redéfinition de la méthode OnRender
+            /// </summary>
+            /// <param name="drawingContext"></param>
             protected override void OnRender(DrawingContext drawingContext)
             {
                 base.OnRender(drawingContext);
@@ -137,66 +196,78 @@ namespace WpfApplication1
                 drawingContext.Pop();
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // GENRE "TOUT" !!! //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Tout ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Tout(object sender, RoutedEventArgs e)
         {
             list.ItemsSource = EMusique;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // GENRE "POP" !!! //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Pop ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Pop(object sender, RoutedEventArgs e)
         {
             List<Musique> Pop = EMusique.Where(musique => musique.Genre == "Pop").ToList();
             list.ItemsSource = Pop;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // GENRE "RAP" !!! //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Rap ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Rap(object sender, RoutedEventArgs e)
         {
             List<Musique> Rap = EMusique.Where(musique => musique.Genre == "Rap").ToList();
             list.ItemsSource = Rap;
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // GENRE "ELECTRO" !!! //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Electro ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Electro(object sender, RoutedEventArgs e)
         {
             List<Musique> Electro = EMusique.Where(musique => musique.Genre == "Electro").ToList();
             list.ItemsSource = Electro;
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // GENRE "ROCK" !!! //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Rock ( recherche par Genre )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Rock(object sender, RoutedEventArgs e)
         {
             List<Musique> Rock = EMusique.Where(musique => musique.Genre == "Rock").ToList();
             list.ItemsSource = Rock;
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // DOUBLE CLIQUE SUR ITEM LIST ----> REDIRECTION SUR MUSIQUES_PAGE !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Double Clique sur 1 item de la ListView --> Redirection vers Musiques_Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             DependencyObject originalSource = (DependencyObject)e.OriginalSource;
@@ -220,18 +291,28 @@ namespace WpfApplication1
                 this.Close();
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////?
 
 
 
-        // MENU MATERIAL DESIGN !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton MesPlaylists renvoyant vers la page MesPlaylists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesPlaylists(object sender, RoutedEventArgs e)
         {
             MesPlaylists MesPlaylists = new MesPlaylists();
@@ -239,6 +320,13 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Bouton MesMusiques renvoyant vers la page MesPlaylists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesMusiques(object sender, RoutedEventArgs e)
         {
             MesMusiques MesMusiques = new MesMusiques();
@@ -246,17 +334,39 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -297,34 +407,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // MENU COMPTE UTILISATEUR !!! //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-        private void SeDeconnecter(object sender, RoutedEventArgs e)
-        {
-            MainWindow MainWindow = new MainWindow();
-            MainWindow.Show();
-            this.Close();
-        }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
-        private void AugmenterSolde(object sender, RoutedEventArgs e)
-        {
-            InputBox.Visibility = Visibility.Visible;
-        }
-        //////////////////////////////////////////////////////////////
-
-
-
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -358,11 +448,17 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton Annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

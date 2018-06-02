@@ -26,22 +26,32 @@ namespace WpfApplication1
 
 
 
-        // GET/SET DE LA LISTE //
-        /////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Methode GET de ListPlaylist
+        /// </summary>
+        /// <returns> ListPlaylist </returns>
         public List<Musique> GetPlaylist()
         {
             return ListPlaylist;
         }
+
+
+
+        /// <summary>
+        /// Methode SET de ListPlaylist
+        /// </summary>
+        /// <param name="musique"></param>
         public void SetPlaylist(Musique musique)
         {
             ListPlaylist.Add(musique);
         }
-        /////////////////////////////////////////////////////////////
 
 
 
-        // REDEFINITION DE LA CROIX X EN HAUT A DROITE //
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Redefinition de la méthode de la croix X 
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
             bool wasCodeClosed = new StackTrace().GetFrames().FirstOrDefault(x => x.GetMethod() == typeof(Window).GetMethod("Close")) != null;
@@ -54,12 +64,14 @@ namespace WpfApplication1
             }
             base.OnClosing(e);
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // AJOUTE UNE MUSIQUE DANS LA LISTE DE CREATION DE PLAYLIST //
-        ////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Ajoute une musique dans la liste de création de la playlist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddMusique(object sender, RoutedEventArgs e)
         {
             MesMusiques MesMusiques = new MesMusiques();
@@ -83,10 +95,14 @@ namespace WpfApplication1
                 MessageBox.Show("Aucune musique sélectionnée !", " Erreur ");
             }
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+        /// <summary>
+        /// Bouton Créer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreePlaylist(object sender, RoutedEventArgs e)
         {
             if (NomPlaylist.Text.ToString() != "") // le nom de playlist ne doit pa être vide //
@@ -107,6 +123,13 @@ namespace WpfApplication1
                 MessageBox.Show("Entrez un nom de playlist !", "Erreur");
         }
 
+
+
+        /// <summary>
+        /// Bouton Retour 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             SQLdelete SQLdelete = new SQLdelete();

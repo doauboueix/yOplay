@@ -11,9 +11,11 @@ namespace WpfApplication1
         }
 
 
-
-        // CONNEXION //
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Connexion 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Connexion(object sender, RoutedEventArgs e)
         {
             SQLselect SQLselect = new SQL.SQLselect();
@@ -27,18 +29,19 @@ namespace WpfApplication1
             else
                 MessageBox.Show("Identifiant ou mot de passe incorrect", "Erreur");
         }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // REDIRECTION VERS INSCRIPTION //
-        ///////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Label Inscription renvoyant vers la page d'inscription d'un nouvel utilisateur
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Inscription(object sender, RoutedEventArgs e)
         {
             Inscription Inscription = new Inscription();
             Inscription.Show();
             this.Close();
         }
-        ///////////////////////////////////////////////////////////////
     }
 }

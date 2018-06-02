@@ -40,31 +40,65 @@ namespace WpfApplication1
 
 
 
-        // MENU //
-        /////////////////////////////////////////////////////////////////////////////////
+       /// <summary>
+       /// Ouvre le menu Material Design
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page Musiques
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             Musiques Musiques = new Musiques();
             Musiques.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Mes Playlists renvoyant vers la page MesPlaylists
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesPlaylists(object sender, RoutedEventArgs e)
         {
             MesPlaylists MesPlaylists = new MesPlaylists();
@@ -72,6 +106,13 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Bouton Mes Musiques renvoyant vers la page MesMusiques
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesMusiques(object sender, RoutedEventArgs e)
         {
             MesMusiques MesMusiques = new MesMusiques();
@@ -79,6 +120,13 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -97,12 +145,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // ACHAT MUSIQUE //
-        /////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Achète une musique et l'ajoute dans la liste des musiques que possède l'utilisateur en cours
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Acheter(object sender, RoutedEventArgs e)
         {
             if (Buy_Button.Content.ToString() == "ACHETER")
@@ -124,6 +174,5 @@ namespace WpfApplication1
                         MessageBox.Show("Fonds insuffisants, veuillez garnir votre solde !", "Erreur"); // si le solde est inférieur au prix, on affiche un message exprimant le fait que l'utilisateur n'a pas les fonds nécessaires //
                 }
         }
-        /////////////////////////////////////////////////////////////////////////////////
     }
 }

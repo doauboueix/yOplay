@@ -36,37 +36,79 @@ namespace WpfApplication1
 
 
 
-        // MENU //
-        /////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page Films
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             Films Films = new Films();
             Films.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Mes Films renvoyant vers la page MesFilms 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesFilms(object sender, RoutedEventArgs e)
         {
             MesFilms MesFilms = new MesFilms();
             MesFilms.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        ///  Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -82,12 +124,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // ACHAT FILM //
-        /////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Acheter qui achète le film affiché 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Acheter(object sender, RoutedEventArgs e)
         {
             if (Buy_Button.Content.ToString() == "ACHETER")
@@ -103,12 +147,11 @@ namespace WpfApplication1
                         MesFilms MesFilms = new MesFilms();
                         MesFilms.SetList(film);
                         SQLupdate achat = new SQLupdate();
-                        achat.AchatFilm(label1.Content.ToString(),Prix);
+                        achat.AchatFilm(label1.Content.ToString(), Prix);
                     }
                     else
                         MessageBox.Show("Fonds insuffisants, veuillez garnir votre solde !", "Erreur"); // si le solde est inférieur au prix, on affiche un message exprimant le fait que l'utilisateur n'a pas les fonds nécessaires //
                 }
         }
-        /////////////////////////////////////////////////////////////////////////////////
     }
 }

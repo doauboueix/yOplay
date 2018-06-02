@@ -2,7 +2,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using SQL;
 
 
 namespace WpfApplication1
@@ -31,6 +30,8 @@ namespace WpfApplication1
             get; set;
         }
 
+
+
         public UCtitre()
         {
             Utilisateur Utilisateur = new Utilisateur();
@@ -42,8 +43,11 @@ namespace WpfApplication1
 
 
 
-        // MENU COMPTE UTILISATEUR !!! //
-        ///////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Déconnecte l'utilisateur en cours, et renvoie vers la page de connexion via l'invocation de l'évênement OnClosed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SeDeconnecter(object sender, RoutedEventArgs e)
         {
             MainWindow MainWindow = new MainWindow();
@@ -53,12 +57,17 @@ namespace WpfApplication1
         }
 
 
+
+        /// <summary>
+        /// Affiche 1 InputBox permettant d'augmenter le solde de l'utilisateur via l'invocation de l'évênement OnSolded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AugmenterSolde(object sender, RoutedEventArgs e)
         {
             if (OnSolded != null)
                 OnSolded.Invoke(this, new EventArgs());
         }
-        ///////////////////////////////////////////////////////////////////////
     }
 }
-    
+

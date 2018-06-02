@@ -9,12 +9,28 @@ namespace WpfApplication1
         {
             InitializeComponent();
         }
+
+
+
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page de connexion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             MainWindow MainWindow = new MainWindow();
             MainWindow.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Créer, qui ajoute un nouvel utilisatuer dans la base de donnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreationCompte(object sender, RoutedEventArgs e)
         {
             if (Login.Text == "" || Mdp.Password == "" || Nom.Text == "" || Prenom.Text == "") // les champs obligatoires doivent être renseignés //
@@ -36,6 +52,12 @@ namespace WpfApplication1
                 this.Close();
             }
         }
+
+
+
+        /// <summary>
+        /// Réinitialise le contenu des textboxs
+        /// </summary>
         private void Clear()
         {
             Nom.Text = Prenom.Text = Login.Text = Mdp.Password = "";

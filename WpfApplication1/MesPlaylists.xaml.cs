@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -50,56 +48,98 @@ namespace WpfApplication1
             UC.OnSolded += UCtitre_OnSolded;
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnClosed du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnClosed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnSolded du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnSolded(object sender, EventArgs e)
         {
             InputBox.Visibility = Visibility.Visible;
         }
 
-        // GET/SET/REMOVE PLAYLIST //
-        /////////////////////////////////////////////////////////
+
+
+        /// <summary>
+        /// Méthode GET de ListePlaylist
+        /// </summary>
+        /// <returns> ListePlaylist </returns>
         public List<Playlist> GetListePlaylist()
         {
             return ListePlaylist;
-        } 
+        }
 
-        public void SetPlaylist ( Playlist p)
+
+
+        /// <summary>
+        /// Méthode SET de ListePlaylist
+        /// </summary>
+        /// <param name="p"></param>
+        public void SetPlaylist(Playlist p)
         {
             ListePlaylist.Add(p);
         }
 
+
+
+        /// <summary>
+        /// Supprime une playlist dans ListPlaylist à l'index p
+        /// </summary>
+        /// <param name="p"></param>
         public void DeletePlaylist(int p)
         {
             ListePlaylist.RemoveAt(p);
         }
-        /////////////////////////////////////////////////////////
 
 
 
-        // CLICK ITEM MENU //
-        //////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Mes Musiques renvoyant vers la page MesMusiques
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MesMusiques(object sender, RoutedEventArgs e)
         {
             MesMusiques MesMusiques = new MesMusiques();
             MesMusiques.Show();
             this.Close();
         }
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
-        {
-            ButtonCloseMenu.Visibility = Visibility.Visible;
-            ButtonOpenMenu.Visibility = Visibility.Collapsed;
-        }
 
+
+
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page Musiques
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             Musiques Musiques = new Musiques();
@@ -107,11 +147,39 @@ namespace WpfApplication1
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+        }
+
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
+
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -129,33 +197,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        ///////////////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON SE DECONNECTER //
-        //////////////////////////////////////////////////////////////////////////
-        private void SeDeconnecter(object sender, RoutedEventArgs e)
-        {
-            MainWindow MainWindow = new MainWindow();
-            MainWindow.Show();
-            this.Close();
-        }
-        //////////////////////////////////////////////////////////////////////////
-
-
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
-        private void AugmenterSolde(object sender, RoutedEventArgs e)
-        {
-            InputBox.Visibility = System.Windows.Visibility.Visible;
-        }
-        //////////////////////////////////////////////////////////////
-
-
-
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -189,29 +238,40 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton Annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON CREER PLAYLIST //
-        //////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Créer Playlist renvoyant vers la page CreationPlaylist
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Playlist(object sender, RoutedEventArgs e)
         {
             CreationPlaylist CreationPlaylist = new CreationPlaylist();
             CreationPlaylist.Show();
             this.Close();
         }
-        //////////////////////////////////////////////////////////////////////////
 
 
 
-        // AFFICHER BOUTON SUPPRIMER //
-        //////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Lorsqu'un item de la liste de playlist est séléctionné, affichage du bouton supprimer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AfficherBouton(object sender, RoutedEventArgs e)
         {
             int cpt = list.Items.Count;
@@ -220,12 +280,14 @@ namespace WpfApplication1
                 DeleteButton.Visibility = Visibility.Visible;
             }
         }
-        //////////////////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON SUPPRIMER PLAYLIST //
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Supprimer la playlist séléctionnée
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Supprimer(object sender, RoutedEventArgs e)
         {
             int i = list.SelectedIndex;
@@ -240,15 +302,17 @@ namespace WpfApplication1
                 DeleteButton.Visibility = Visibility.Hidden;
             }
         }
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // CLICK ITEM LIST PLAYLIST ---> REDIRECTION VERS MEDIA PLAYER //
-        //////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Double clique sur un item de la liste de playlist --> Redirection vers le Media Player qui permet de jouer cette playlist 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Playlist(object sender, RoutedEventArgs e)
-        { 
-            if(list.SelectedItem != null)
+        {
+            if (list.SelectedItem != null)
             {
                 var Playlist = list.SelectedItem as Playlist;
                 MLGcustomPlayer MLGcustomPlayer = new MLGcustomPlayer(Playlist);
@@ -256,6 +320,5 @@ namespace WpfApplication1
                 this.Close();
             }
         }
-        //////////////////////////////////////////////////////////////////////////////
     }
 }

@@ -10,59 +10,72 @@ namespace WpfApplication1
         public Accueil()
         {
             InitializeComponent();
- 
+            Utilisateur Utilisateur = new Utilisateur();
+            NomPrenom.Content = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
+            Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€"; // Initialise le label Solde dans le menu utilisateur //
         }
 
 
 
-        // BOUTON FILMS //
-        /////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Affiche la page Films quand on clique sur le bouton FILMS
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Films(object sender, RoutedEventArgs e)
         {
             Films Films = new Films();
             Films.Show();
             this.Close();
         }
-        /////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON MUSIQUES //
-        /////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Affiche la page Musiques quand on clique sur le bouton MUSIQUES
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Musiques(object sender, RoutedEventArgs e)
         {
             Musiques Musiques = new Musiques();
             Musiques.Show();
             this.Close();
         }
-        /////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON SE DECONNECTER //
-        //////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Déconnecte l'utilisateur en cours et renvoie sur la page de connexion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SeDeconnecter(object sender, RoutedEventArgs e)
         {
             MainWindow MainWindow = new MainWindow();
             MainWindow.Show();
             this.Close();
         }
-        //////////////////////////////////////////////////////////////
 
 
 
-        // BOUTON AJOUTER SOLDE //
-        //////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Affiche 1 InputBox pour augmenter son solde
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AugmenterSolde(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = System.Windows.Visibility.Visible;
         }
-        //////////////////////////////////////////////////////////////
 
 
 
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -95,11 +108,17 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;
             InputTextBox.Text = String.Empty;
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }

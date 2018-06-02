@@ -25,62 +25,128 @@ namespace WpfApplication1
             UC.OnSolded += UCtitre_OnSolded;
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnClosed du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnClosed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+
+
+        /// <summary>
+        /// Méthode utilisée pour l'évênement OnSolded du UserControl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UCtitre_OnSolded(object sender, EventArgs e)
         {
-                InputBox.Visibility = Visibility.Visible;
+            InputBox.Visibility = Visibility.Visible;
         }
-        
-        // LIST : GET, SET !!! //
-        //////////////////////////////////////////////
+
+
+
+
+        /// <summary>
+        /// Méthode GET de eFilm
+        /// </summary>
+        /// <returns> eFilm </returns>
         public List<Film> GetList()
         {
             return eFilm;
         }
+
+
+
+        /// <summary>
+        /// Méthode SET de eFilm
+        /// </summary>
+        /// <param name="film"></param>
         public void SetList(Film film)
         {
             eFilm.Add(film);
         }
-        //////////////////////////////////////////////
 
 
 
-        // MENU MATERIAL DESIGN !!! //
-        ///////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton Retour renvoyant vers la page Films
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Retour(object sender, RoutedEventArgs e)
         {
             Films Films = new Films();
             Films.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Accueil renvoyant vers la page Accueil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Accueil(object sender, RoutedEventArgs e)
         {
             Accueil Accueil = new Accueil();
             Accueil.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Bouton Films renvoyant vers la page Films
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Films(object sender, RoutedEventArgs e)
         {
             Films Films = new Films();
             Films.Show();
             this.Close();
         }
+
+
+
+        /// <summary>
+        /// Ouvre le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Visible;
             ButtonOpenMenu.Visibility = Visibility.Collapsed;
         }
 
+
+
+        /// <summary>
+        /// Ferme le menu Material Design
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
         {
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
             ButtonOpenMenu.Visibility = Visibility.Visible;
         }
 
+
+
+        /// <summary>
+        /// Regroupe toutes les methodes du menu Material Design ( car ils sont dans une ListView donc obligation de passer par un switch / case )
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
@@ -93,12 +159,14 @@ namespace WpfApplication1
                     break;
             }
         }
-        ///////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // INPUT BOX //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Bouton valider de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
             int cpt = 0;
@@ -123,7 +191,7 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-                
+
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde();
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
@@ -132,6 +200,13 @@ namespace WpfApplication1
             }
         }
 
+
+
+        /// <summary>
+        /// Bouton annuler de l'InputBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Annuler_Click(object sender, RoutedEventArgs e)
         {
             InputBox.Visibility = Visibility.Collapsed;

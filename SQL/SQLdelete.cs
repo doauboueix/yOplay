@@ -12,11 +12,12 @@ namespace SQL
 
 
 
-        // Suppression playlist dans CreationPlaylist lorsqu'on quitte sur la croix X ou bouton retour //
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Suppression playlist dans CreationPlaylist lorsqu'on quitte sur la croix X ou bouton retour
+        /// </summary>
         public void DeletePlaylist()
         {
-            using (SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString))
+            using (sqlCon)
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 sqlCon.Open();
@@ -25,25 +26,25 @@ namespace SQL
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-        // Suppression playlist dans MesPlaylists //
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// <summary>
+        /// Suppression playlist dans MesPlaylists
+        /// </summary>
+        /// <param name="nom"></param>
         public void SupprimerPlaylist(string nom)
         {
             using (sqlCon)
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 sqlCon.Open();
-                SqlCommand cmd = new SqlCommand("DELETE FROM UserPlaylist WHERE UserName = @UserName and NamePlaylist = @NamePlaylist", sqlCon); // On créé une commande qui supprime une playlist //
-                cmd.CommandType = CommandType.Text;
+                SqlCommand cmd = new SqlCommand("DeletePlaylist", sqlCon); // On créé une commande qui supprime une playlist //
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@NamePlaylist", nom); // Cette procédure prend en paramètre le nom de la playlist //
                 cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Et aussi l'identifiant de l'utilisateur //
                 cmd.ExecuteNonQuery(); // Exécute la procédure //
             }
         }
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     }
 }
