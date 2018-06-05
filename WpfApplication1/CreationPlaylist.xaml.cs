@@ -74,6 +74,7 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void AddMusique(object sender, RoutedEventArgs e)
         {
+            Utilisateur Utilisateur = new Utilisateur();
             MesMusiques MesMusiques = new MesMusiques();
             int index = GetPlaylist().FindIndex(item => item.Titre == SelectBox.Text.ToString()); // on vérifie si la playlist en cours de création ne possède pas 2 fois la même musique, via un index //
             var son = MesMusiques.GetList().Find(x => x.Titre == SelectBox.Text.ToString());
@@ -85,7 +86,7 @@ namespace WpfApplication1
                     list.Items.Add(son);
                     SetPlaylist(son);
                     SQLupdate SQLupdate = new SQLupdate();
-                    SQLupdate.AjouterPlaylist(SelectBox.Text);
+                    SQLupdate.AjouterPlaylist(Utilisateur.GetUserName(), SelectBox.Text);
                 }
                 else
                     MessageBox.Show("Cette musique est déja dans la liste !", "Erreur");

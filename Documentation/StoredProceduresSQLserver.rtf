@@ -1,0 +1,211 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1036{\fonttbl{\f0\fnil Consolas;}{\f1\fnil\fcharset0 Calibri;}}
+{\colortbl ;\red0\green0\blue255;\red255\green255\blue255;\red0\green0\blue0;\red0\green128\blue0;\red128\green128\blue128;\red255\green0\blue0;\red255\green0\blue255;}
+{\*\generator Riched20 10.0.10586}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\cf1\highlight2\f0\fs19\lang12 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[AchatFilm]    Script Date: 10/05/2018 01:54:10 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [AchatFilm]\par
+\par
+@Nom \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\tab\cf1 INSERT\cf3  \cf1 INTO\cf3  UserFilm\cf5 (\cf3 Nom\cf5 ,\cf3  UserName\cf5 )\cf3\par
+\tab\cf1 VALUES\cf5 (\cf3 @Nom\cf5 ,\cf3  @UserName\cf5 )\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[AchatMusique]    Script Date: 10/05/2018 01:54:26 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [AchatMusique]\par
+\par
+@Name \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\tab\cf1 INSERT\cf3  \cf1 INTO\cf3  UserMusique\cf5 (\cf1 Name\cf5 ,\cf3  UserName\cf5 )\cf3\par
+\tab\cf1 VALUES\cf5 (\cf3 @Name\cf5 ,\cf3  @UserName\cf5 )\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[ChargementMesFilms]    Script Date: 10/05/2018 01:54:44 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [ChargementMesFilms]\cf5 (\cf3 @UserName \cf1 varchar\cf5 (\cf3 50\cf5 ))\cf3\par
+\cf1 AS\cf3\par
+\cf1 BEGIN\cf3\par
+    \cf1 SELECT\cf3  \cf5 *\cf3  \cf1 FROM\cf3  UserFilm \cf1 Where\cf3  UserName \cf5 =\cf3  @UserName\par
+\cf1 END\par
+\par
+USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[ChargementMesMusiques]    Script Date: 10/05/2018 01:55:00 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [ChargementMesMusiques]\cf5 (\cf3 @UserName \cf1 varchar\cf5 (\cf3 50\cf5 ))\cf3\par
+\par
+\cf1 AS\cf3\par
+\cf1 BEGIN\cf3\par
+    \cf1 SELECT\cf3  \cf5 *\cf3  \cf1 FROM\cf3  UserMusique \cf1 Where\cf3  UserName \cf5 =\cf3  @UserName\par
+\cf1 END\par
+\par
+USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[ChargementMesPlaylists]    Script Date: 10/05/2018 01:55:12 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [ChargementMesPlaylists]\cf5 (\cf3 @UserName \cf1 varchar\cf5 (\cf3 50\cf5 ))\cf3\par
+\cf1 AS\cf3\par
+\cf1 BEGIN\cf3\par
+    \cf1 SELECT\cf3  \cf5 *\cf3  \cf1 FROM\cf3  UserPlaylist \cf1 Where\cf3  UserName \cf5 =\cf3  @UserName\par
+\cf1 END\par
+\par
+USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[DeleteUserPlaylist]    Script Date: 10/05/2018 01:55:23 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [DeleteUserPlaylist]\par
+\cf1 AS\cf3\par
+\cf1 BEGIN\cf3\par
+    \cf1 DELETE\cf3  \cf1 FROM\cf3  UserPlaylist \cf1 Where\cf3  NamePlaylist \cf5 =\cf3  \cf6 ''\cf3\par
+\cf1 END\par
+\par
+USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[EnregistrementPlaylist]    Script Date: 10/05/2018 01:55:32 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [EnregistrementPlaylist]\par
+\par
+@NameSong \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@NamePlaylist \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\tab\cf1 INSERT\cf3  \cf1 INTO\cf3  UserPlaylist\cf5 (\cf3 NameSong\cf5 ,\cf3  NamePlaylist \cf5 ,\cf3 UserName\cf5 )\cf3\par
+\tab\cf1 VALUES\cf5 (\cf3 @NameSong\cf5 ,\cf3  @NamePlaylist\cf5 ,\cf3  @UserName\cf5 )\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[Inscription]    Script Date: 10/05/2018 01:55:44 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [Inscription]\par
+@Nom \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@Prenom \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@Password \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@Solde \cf1 Decimal\cf5 (\cf3 18\cf5 ,\cf3 2\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\tab\cf1 INSERT\cf3  \cf1 INTO\cf3  UserTable\cf5 (\cf3 Nom\cf5 ,\cf3  Prenom\cf5 ,\cf3  UserName\cf5 ,\cf3  \cf1 Password\cf5 ,\cf3  Solde\cf5 )\cf3\par
+\tab\cf1 VALUES\cf5 (\cf3 @Nom\cf5 ,\cf3  @Prenom\cf5 ,\cf3  @UserName\cf5 ,\cf3  @Password\cf5 ,\cf3  @Solde\cf5 )\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[UpdatePlaylist]    Script Date: 10/05/2018 01:55:56 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [UpdatePlaylist]\par
+@NamePlaylist \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3  \par
+\tab\cf7 UPDATE\cf3  UserPlaylist\par
+\tab\cf1 SET\cf3  NamePlaylist \cf5 =\cf3  @NamePlaylist\par
+\tab\cf1 Where\cf3  NamePlaylist \cf5 =\cf3  \cf6 ''\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[DeletePlaylist]    Script Date: 02/06/2018 04:53:26 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [DeletePlaylist]\par
+@NamePlaylist \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3  \par
+\cf1 DELETE\cf3  \cf1 FROM\cf3  UserPlaylist \cf1 WHERE\cf3  UserName \cf5 =\cf3  @UserName \cf5 and\cf3  NamePlaylist \cf5 =\cf3  @NamePlaylist\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[LoadListPlaylist]    Script Date: 02/06/2018 04:54:11 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [LoadListPlaylist]\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\cf1 SELECT\cf3  \cf5 *\cf3  \cf1 from\cf3  UserPlaylist \cf1 WHERE\cf3  UserName \cf5 =\cf3  @UserName\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[GetUserInfos]    Script Date: 02/06/2018 04:54:27 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [GetUserInfos]\par
+@Identifiant \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\cf1 SELECT\cf3  Nom\cf5 ,\cf3 Prenom\cf5 ,\cf3 Solde \cf1 FROM\cf3  UserTable \cf1 WHERE\cf3  UserName\cf5 =\cf3 @Identifiant\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[CheckConnexion]    Script Date: 02/06/2018 04:54:49 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [CheckConnexion]\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 ),\cf3\par
+@Password \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\cf1 SELECT\cf3  \cf7 COUNT\cf5 (\cf3 1\cf5 )\cf3  \cf1 FROM\cf3  UserTable \cf1 WHERE\cf3  UserName\cf5 =\cf3 @UserName \cf5 AND\cf3  \cf1 Password\cf5 =\cf3 @Password\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[ReduceSolde]    Script Date: 02/06/2018 04:55:21 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [ReduceSolde]\par
+@Prix \cf1 decimal\cf5 (\cf3 18\cf5 ,\cf3 2\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\cf7 UPDATE\cf3  UserTable \cf1 SET\cf3  Solde \cf5 -=\cf3  @Prix \cf1 WHERE\cf3  UserName \cf5 =\cf3  @UserName\par
+\par
+\cf1 USE\cf3  [DataBaseProject]\par
+\cf1 GO\cf3\par
+\cf4 /****** Object:  StoredProcedure [dbo].[UpdateSolde]    Script Date: 02/06/2018 04:55:35 ******/\cf3\par
+\cf1 SET\cf3  \cf1 ANSI_NULLS\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 SET\cf3  \cf1 QUOTED_IDENTIFIER\cf3  \cf1 ON\cf3\par
+\cf1 GO\cf3\par
+\cf1 ALTER\cf3  \cf1 PROC\cf3  [dbo]\cf5 .\cf3 [UpdateSolde]\par
+\par
+@Solde \cf1 decimal\cf5 (\cf3 18\cf5 ,\cf3 2\cf5 ),\cf3\par
+@UserName \cf1 varchar\cf5 (\cf3 50\cf5 )\cf3\par
+\cf1 AS\cf3\par
+\cf7 UPDATE\cf3  UserTable \cf1 SET\cf3  Solde \cf5 =\cf3  @Solde \cf1 WHERE\cf3  UserName \cf5 =\cf3  @UserName\cf0\highlight0\f1\fs22\par
+}
+ 

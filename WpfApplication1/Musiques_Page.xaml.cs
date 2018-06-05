@@ -168,7 +168,7 @@ namespace WpfApplication1
                         MesMusiques MesMusiques = new MesMusiques();
                         MesMusiques.SetList(musique);
                         SQLupdate SQLupdate = new SQLupdate();
-                        SQLupdate.AcheterMusique(Prix, label1.Content.ToString());
+                        SQLupdate.AcheterMusique(Utilisateur.GetUserName(),Prix, label1.Content.ToString());
                     }
                     else
                         MessageBox.Show("Fonds insuffisants, veuillez garnir votre solde !", "Erreur"); // si le solde est inférieur au prix, on affiche un message exprimant le fait que l'utilisateur n'a pas les fonds nécessaires //

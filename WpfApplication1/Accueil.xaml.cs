@@ -10,7 +10,7 @@ namespace WpfApplication1
         public Accueil()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             NomPrenom.Content = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€"; // Initialise le label Solde dans le menu utilisateur //
         }
@@ -98,11 +98,11 @@ namespace WpfApplication1
             }
             else
             {
-                Utilisateur Utilisateur = new Utilisateur();
+                Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                 SQLupdate SQLupdate = new SQLupdate();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
             }

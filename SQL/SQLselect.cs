@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using ClassLibrary;
@@ -9,8 +8,7 @@ namespace SQL
 {
     public class SQLselect
     {
-        private SqlConnection sqlCon = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLserver"].ConnectionString);
-        private static Utilisateur CurrentUtilisateur;
+        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-4F4HM0E\SQLEXPRESS;Initial Catalog=DataBaseProject;Integrated Security=True");
 
 
         /// <summary>
@@ -46,7 +44,7 @@ namespace SQL
                         Utilisateur.SetSolde((decimal)reader[2]); // Recupere le Solde //
                     }
                     reader.Close(); // on ferme le reader une fois l'action terminée //
-                    CurrentUtilisateur = Utilisateur;
+                    Utilisateur.CurrentUtilisateur = Utilisateur;
                     return 1;
                 }
                 else
@@ -60,7 +58,7 @@ namespace SQL
         /// Chargement des Films que l'utilisateur possède dans MesFikms
         /// </summary>
         /// <returns> mesFilms</returns>
-        public List<string> ChargementMesFilms()
+        public List<string> ChargementMesFilms(string username)
         {
             using (sqlCon)
             {
@@ -69,7 +67,7 @@ namespace SQL
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("ChargementMesFilms", sqlCon); // Appelle la procédure stockée ChargementMesFilms qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName()); // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
+                cmd.Parameters.AddWithValue("@UserName", username); // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
                 cmd.ExecuteNonQuery(); // Execute la procédure //
                 SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
                 while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //
@@ -87,7 +85,7 @@ namespace SQL
         /// Chargement des musiques que l'utilisateur possède dans MesMusiques
         /// </summary>
         /// <returns> mesMusiques </returns>
-        public List<string> ChargementMesMusiques()
+        public List<string> ChargementMesMusiques(string username)
         {
             using (sqlCon)
             {
@@ -96,7 +94,7 @@ namespace SQL
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("ChargementMesMusiques", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName());  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
+                cmd.Parameters.AddWithValue("@UserName", username);  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
                 cmd.ExecuteNonQuery(); // Execute la procédure //
                 SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
                 while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //
@@ -114,7 +112,7 @@ namespace SQL
         /// Chargement des playlists créées par l'utilisateurs dans MesPlaylists 
         /// </summary>
         /// <returns> LoadingPlaylists </returns>
-        public List<ListPlaylists> ChargementPlaylist()
+        public List<ListPlaylists> ChargementPlaylist(string username)
         {
             using (sqlCon)
             {
@@ -123,7 +121,7 @@ namespace SQL
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("LoadListPlaylist", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@UserName", Utilisateur.GetUserName());  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
+                cmd.Parameters.AddWithValue("@UserName", username);  // Cette procédure prend en paramètre l'identifiant de l'utilisateur en cours que l'on récupère au moment de la connexion (lorsque celle-ci réussit) //
                 cmd.ExecuteNonQuery(); // Execute la procédure //
                 SqlDataReader reader = cmd.ExecuteReader(); // on créé un reader capable de lire des données SQL //
                 while (reader.Read()) // Tant que ce reader lit des données on éxécute le code ci-dessous //

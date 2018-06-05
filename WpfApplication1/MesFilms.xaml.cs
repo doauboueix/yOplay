@@ -16,7 +16,7 @@ namespace WpfApplication1
             InitializeComponent();
             Utilisateur Utilisateur = new Utilisateur();
             SQLselect SQLselect = new SQLselect();
-            mesFilms = SQLselect.ChargementMesFilms();
+            mesFilms = SQLselect.ChargementMesFilms(Utilisateur.GetUserName());
             Films Films = new Films();
             foreach (string film in mesFilms) // Pour chacun des noms de films présent dans cette liste, on cherche la correspondance avec l'objet "Film" en question //
                 eFilm.Add(Films.EFilms.Find(x => x.Nom == film)); // On retourne l'objet correspond dans une list<Film> //
@@ -191,9 +191,8 @@ namespace WpfApplication1
             {
                 Utilisateur Utilisateur = new Utilisateur();
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
-
                 SQLupdate SQLupdate = new SQLupdate();
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

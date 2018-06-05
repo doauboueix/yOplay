@@ -8,6 +8,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using SQL;
+using System.Diagnostics;
+using System.Linq;
 
 namespace WpfApplication1
 {
@@ -23,8 +25,9 @@ namespace WpfApplication1
         public MesMusiques()
         {
             InitializeComponent();
+            Utilisateur Utilisateur = new Utilisateur();
             SQLselect SQLselect = new SQLselect();
-            mesMusiques = SQLselect.ChargementMesMusiques();
+            mesMusiques = SQLselect.ChargementMesMusiques(Utilisateur.GetUserName());
             Musiques Musiques = new Musiques();
             foreach (string musique in mesMusiques) // Pour chacun des noms de musique présent dans cette liste, on cherche la correspondance avec l'objet "Musique" en question //
                 eMusique.Add(Musiques.EMusique.Find(x => x.Titre == musique)); // On retourne l'objet correspond dans une list<Musique> //
@@ -77,6 +80,23 @@ namespace WpfApplication1
         public void SetList(Musique musique)
         {
             eMusique.Add(musique);
+        }
+
+
+
+        /// <summary>
+        /// Redefinition de la méthode de la croix X 
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            bool wasCodeClosed = new StackTrace().GetFrames().FirstOrDefault(x => x.GetMethod() == typeof(Window).GetMethod("Close")) != null;
+            if (!wasCodeClosed) // Si la fenetre a été fermé par un click sur la croix X, on éxécute le code ci-dessous // 
+            {
+                if (Stop.Visibility == Visibility.Visible)
+                    SoundPlayer.Stop();
+            }
+            base.OnClosing(e);
         }
 
 
@@ -213,7 +233,7 @@ namespace WpfApplication1
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

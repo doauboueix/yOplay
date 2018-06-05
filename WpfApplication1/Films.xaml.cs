@@ -404,7 +404,7 @@ namespace WpfApplication1
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(),Convert.ToDecimal(input));
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;

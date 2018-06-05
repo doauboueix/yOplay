@@ -1,20 +1,17 @@
-﻿
-using System.Collections.Generic;
-
-namespace ClassLibrary
+﻿namespace ClassLibrary
 {
     public class Utilisateur
     {
-        private static Utilisateur CurrentUtilisateur;
+        public static Utilisateur CurrentUtilisateur;
         private string UserName;
         private string Nom;
         private string Prenom;
         private decimal Solde;
-        private static Dictionary<ListPlaylists, string> dictionary;
+       //private static Dictionary<ListPlaylists, string> dictionary;
 
         public Utilisateur()
         {
-            CurrentUtilisateur = this;
+           CurrentUtilisateur = this;
         }
         
         ////////////////////////////////////////////////
@@ -72,7 +69,7 @@ namespace ClassLibrary
         }
         ////////////////////////////////////////////////
 
-        public Dictionary<ListPlaylists, string> GetDictionary()
+       /* public Dictionary<ListPlaylists, string> GetDictionary()
         {
             return dictionary;
         }
@@ -83,5 +80,6 @@ namespace ClassLibrary
             dictionary.Add(list, username);
         }
         ////////////////////////////////////////////////
+        */
     }
 }

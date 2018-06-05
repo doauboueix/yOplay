@@ -18,8 +18,9 @@ namespace WpfApplication1
         public MesPlaylists()
         {
             InitializeComponent();
+            Utilisateur Utilisateur = new Utilisateur();
             SQLselect SQLselect = new SQLselect();
-            LoadingPlaylists = SQLselect.ChargementPlaylist();
+            LoadingPlaylists = SQLselect.ChargementPlaylist(Utilisateur.GetUserName());
 
             Musiques Musiques = new Musiques();
             if (LoadingPlaylists.Count != 0)
@@ -231,7 +232,7 @@ namespace WpfApplication1
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
@@ -290,6 +291,7 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void Supprimer(object sender, RoutedEventArgs e)
         {
+            Utilisateur Utilisateur = new Utilisateur();
             int i = list.SelectedIndex;
             string nom = GetListePlaylist()[i].Nom;
             if (MessageBox.Show("Voulez-vous supprimer la playlist '" + nom + "'!", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -298,7 +300,7 @@ namespace WpfApplication1
                 ICollectionView view = CollectionViewSource.GetDefaultView(list.ItemsSource);
                 view.Refresh();
                 SQLdelete SQLdelete = new SQLdelete();
-                SQLdelete.SupprimerPlaylist(nom);
+                SQLdelete.SupprimerPlaylist(Utilisateur.GetUserName() ,nom);
                 DeleteButton.Visibility = Visibility.Hidden;
             }
         }

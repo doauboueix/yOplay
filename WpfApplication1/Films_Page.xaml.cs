@@ -147,7 +147,7 @@ namespace WpfApplication1
                         MesFilms MesFilms = new MesFilms();
                         MesFilms.SetList(film);
                         SQLupdate achat = new SQLupdate();
-                        achat.AchatFilm(label1.Content.ToString(), Prix);
+                        achat.AchatFilm(Utilisateur.GetUserName(),label1.Content.ToString(), Prix);
                     }
                     else
                         MessageBox.Show("Fonds insuffisants, veuillez garnir votre solde !", "Erreur"); // si le solde est inférieur au prix, on affiche un message exprimant le fait que l'utilisateur n'a pas les fonds nécessaires //

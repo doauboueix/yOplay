@@ -1,6 +1,6 @@
 ﻿namespace ClassLibrary
 {
-    public class Media
+    public abstract class Media
     {
         public decimal Prix { get; }
         public string Genre { get; }
@@ -13,5 +13,4 @@
             Source = imageSource;
         }
     }
-
 }

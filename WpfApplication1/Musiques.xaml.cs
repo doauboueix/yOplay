@@ -61,6 +61,8 @@ namespace WpfApplication1
             EMusique.Add(new Musique(1.99M, "Rap", "pack://application:,,,/WpfApplication1;component/adds/Musique/AllTheStars.jpg", "All the Stars", "Kendrick Lamar & SZA", "Black Panther", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\AllTheStars.wav"));
             EMusique.Add(new Musique(0.99M, "Electro", "pack://application:,,,/WpfApplication1;component/adds/Musique/LikeIDo.jpg", "Like I do", "David Guetta & Martin Garrix & Brooks", "", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\LikeIDo.wav"));
             EMusique.Add(new Musique(2.99M, "Rock", "pack://application:,,,/WpfApplication1;component/adds/Musique/Disillusioned.jpg", "Disillusioned", "A Perfect Circle", "Eat the Elephant", @"C:\Users\doauboueix\Desktop\yoplay\WpfApplication1\adds\Media\Disillusioned.wav"));
+
+
             list.ItemsSource = EMusique;
             CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(list.ItemsSource);
             view.Filter = UserFilter;
@@ -441,7 +443,7 @@ namespace WpfApplication1
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
-                SQLupdate.UpdateSolde();
+                SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
 
                 InputBox.Visibility = Visibility.Collapsed;
                 InputTextBox.Text = String.Empty;
