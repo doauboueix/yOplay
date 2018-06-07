@@ -137,7 +137,7 @@ namespace WpfApplication1
             if (Buy_Button.Content.ToString() == "ACHETER")
                 if (MessageBox.Show("Voulez-vous acheter ce film?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    Utilisateur Utilisateur = new Utilisateur();
+                    Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                     if (Utilisateur.GetSolde() >= Prix) // si le solde de l'utilisateur est supérieur ou égal au prix du film //
                     {
                         Utilisateur.ReduireSolde(Prix); // alors on réduit le solde de celui-ci par le prix du film //

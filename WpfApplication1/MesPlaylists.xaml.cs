@@ -18,7 +18,7 @@ namespace WpfApplication1
         public MesPlaylists()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             SQLselect SQLselect = new SQLselect();
             LoadingPlaylists = SQLselect.ChargementPlaylist(Utilisateur.GetUserName());
 
@@ -228,7 +228,7 @@ namespace WpfApplication1
             }
             else
             {
-                Utilisateur Utilisateur = new Utilisateur();
+                Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();
@@ -291,7 +291,7 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void Supprimer(object sender, RoutedEventArgs e)
         {
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             int i = list.SelectedIndex;
             string nom = GetListePlaylist()[i].Nom;
             if (MessageBox.Show("Voulez-vous supprimer la playlist '" + nom + "'!", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)

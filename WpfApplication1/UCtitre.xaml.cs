@@ -34,7 +34,7 @@ namespace WpfApplication1
 
         public UCtitre()
         {
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             NomPrenom = Utilisateur.GetPrenom() + " " + Utilisateur.GetNom();
             InitializeComponent();
             Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";

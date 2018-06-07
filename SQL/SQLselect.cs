@@ -8,7 +8,7 @@ namespace SQL
 {
     public class SQLselect
     {
-        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-4F4HM0E\SQLEXPRESS;Initial Catalog=DataBaseProject;Integrated Security=True");
+        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-5SACIKC,49172; Initial Catalog=DataBaseProject;Integrated Security=True");
 
 
         /// <summary>
@@ -63,7 +63,6 @@ namespace SQL
             using (sqlCon)
             {
                 List<string> mesFilms = new List<string>();
-                Utilisateur Utilisateur = new Utilisateur();
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("ChargementMesFilms", sqlCon); // Appelle la procédure stockée ChargementMesFilms qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -90,7 +89,6 @@ namespace SQL
             using (sqlCon)
             {
                 List<string> mesMusiques = new List<string>();
-                Utilisateur Utilisateur = new Utilisateur();
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("ChargementMesMusiques", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -117,7 +115,6 @@ namespace SQL
             using (sqlCon)
             {
                 List<ListPlaylists> LoadingPlaylists = new List<ListPlaylists>();
-                Utilisateur Utilisateur = new Utilisateur();
                 sqlCon.Open();
                 SqlCommand cmd = new SqlCommand("LoadListPlaylist", sqlCon); // Appelle la procédure stockée ChargementMesMusiques qui recupère le nom de tous les films pour l'utilisateur en cours //
                 cmd.CommandType = CommandType.StoredProcedure;

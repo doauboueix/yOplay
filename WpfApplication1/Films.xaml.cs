@@ -400,7 +400,7 @@ namespace WpfApplication1
             }
             else
             {
-                Utilisateur Utilisateur = new Utilisateur();
+                Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 UC.Solde.Content = "Mon solde: " + Utilisateur.GetSolde() + "€";
                 SQLupdate SQLupdate = new SQLupdate();

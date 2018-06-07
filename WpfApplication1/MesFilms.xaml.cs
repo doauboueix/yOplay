@@ -14,7 +14,7 @@ namespace WpfApplication1
         public MesFilms()
         {
             InitializeComponent();
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             SQLselect SQLselect = new SQLselect();
             mesFilms = SQLselect.ChargementMesFilms(Utilisateur.GetUserName());
             Films Films = new Films();
@@ -189,7 +189,7 @@ namespace WpfApplication1
             }
             else
             {
-                Utilisateur Utilisateur = new Utilisateur();
+                Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                 Utilisateur.AjouterSolde(Convert.ToDecimal(input));
                 SQLupdate SQLupdate = new SQLupdate();
                 SQLupdate.UpdateSolde(Utilisateur.GetUserName(), Convert.ToDecimal(input));
