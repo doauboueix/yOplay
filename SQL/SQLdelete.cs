@@ -6,7 +6,7 @@ namespace SQL
 {
     public class SQLdelete
     {
-        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-4F4HM0E\SQLEXPRESS;Initial Catalog=DataBaseProject;Integrated Security=True");  // String de connexion stocké dans app.config de WpfApplication1 //
+        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-5SACIKC,49172; Initial Catalog=DataBaseProject;Integrated Security=True");  // String de connexion stocké dans app.config de WpfApplication1 //
 
 
 

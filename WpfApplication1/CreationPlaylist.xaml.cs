@@ -74,7 +74,7 @@ namespace WpfApplication1
         /// <param name="e"></param>
         private void AddMusique(object sender, RoutedEventArgs e)
         {
-            Utilisateur Utilisateur = new Utilisateur();
+            Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
             MesMusiques MesMusiques = new MesMusiques();
             int index = GetPlaylist().FindIndex(item => item.Titre == SelectBox.Text.ToString()); // on vérifie si la playlist en cours de création ne possède pas 2 fois la même musique, via un index //
             var son = MesMusiques.GetList().Find(x => x.Titre == SelectBox.Text.ToString());

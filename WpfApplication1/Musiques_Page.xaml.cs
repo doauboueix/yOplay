@@ -158,7 +158,7 @@ namespace WpfApplication1
             if (Buy_Button.Content.ToString() == "ACHETER")
                 if (MessageBox.Show("Voulez-vous acheter cette musiques?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    Utilisateur Utilisateur = new Utilisateur();
+                    Utilisateur Utilisateur = Utilisateur.CurrentUtilisateur;
                     if (Utilisateur.GetSolde() >= Prix) // si le solde de l'utilisateur est supérieur ou égal au prix de la musique //
                     {
                         Utilisateur.ReduireSolde(Prix); // alors on réduit le solde de celui-ci par le prix de la musique //

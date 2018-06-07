@@ -5,7 +5,7 @@ namespace SQL
 {
     public class SQLupdate
     {
-        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-4F4HM0E\SQLEXPRESS;Initial Catalog=DataBaseProject;Integrated Security=True");
+        private SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-5SACIKC,49172; Initial Catalog=DataBaseProject;Integrated Security=True");
 
         /// <summary>
         /// Met à jour le solde de l'utilisateur en cours
