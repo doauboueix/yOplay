@@ -1,0 +1,9 @@
+
+Diagramme de séquence : 
+
+Notre diagramme de séquence représente le fonctionnement de la méthode Inscription ainsi que Connexion.
+
+Pour pouvoir créer un compte utilisateur, la méthode inscription sur la page MainWindow (page d'accueil) doit être appellée. Cette dernière renvoit vers la page Inscription qui permet à l'utilisateur de s'enregistrer et de valider les informations souhaitées par l'application en appellant la méthode CréationCompte.
+Cette dernière va ajouter dans la base de données les informations rentrées par l'utilisateur et les sauvegarder via la méthodes Inscription se trouvant dans la classe SQLupdate.
+Une fois cette opération réussie, l'utilisateur est alors redirigée vers la page d'accueil où il est possible pour lui de s'authentifier avec le nom d'utilisateur ainsi que le mot de passe rentré précédemment via la méthode Connexion qui va faire appelle à une autre méthode nommée SQLConnexion se trouvant dans la classe SQLselect qui va retourner 1 si le nom d'utilisateur ainsi que le mot de passe sont détéctés dans la base de données.
+Dès lors l'utilisateur sera donc connectée à l'application et pourra effectuer les tâches mises à disposition de celui-ci.
